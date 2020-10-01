@@ -25,7 +25,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField cantidad;
     @FXML
-    private ChoiceBox moneda;
+    private ChoiceBox<String> moneda;
     @FXML
     private Button igual; 
     @FXML
@@ -34,6 +34,32 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void calcular(ActionEvent event) {
         
+        String op = this.moneda.getValue();
+        double cambio;
+        
+        switch (op) {
+            case "$":        
+                cambio = getCantidad() * 0.85;
+                this.resultado.setText( cambio + " €" );
+                break;
+            case "€":
+                cambio = getCantidad() * 1.17;
+                this.resultado.setText( cambio + " $" );
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+    }
+    
+    private double getCantidad(){
+        double dinero;
+        try{
+            dinero = Double.parseDouble(this.cantidad.getText());
+        }catch (Exception ex) {
+            dinero = Double.NaN;
+        }
+        return dinero;
     }
     
     @Override
