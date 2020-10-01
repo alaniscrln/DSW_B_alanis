@@ -6,18 +6,17 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.collections.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="203.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.iespuertodelacruz.alanissimoes.controlador.FXMLDocumentController">
    <children>
       <TextField fx:id="cantidad" layoutX="31.0" layoutY="106.0" prefHeight="25.0" prefWidth="104.0" />
-      <ChoiceBox fx:id="moneda" layoutX="144.0" layoutY="106.0" prefHeight="25.0" prefWidth="45.0" />
-      <Button fx:id="igual" layoutX="200.0" layoutY="106.0" mnemonicParsing="false" onAction="#calcular" prefHeight="25.0" prefWidth="45.0" text="=" />
       <TextField fx:id="resultado" layoutX="254.0" layoutY="106.0" prefHeight="25.0" prefWidth="104.0" />
-      <Label layoutX="120.0" layoutY="16.0" prefHeight="61.0" prefWidth="143.0" text="CONVERSOR&#10;DOLAR - EURO" textAlignment="CENTER">
+      <Label layoutX="133.0" layoutY="14.0" prefHeight="61.0" prefWidth="124.0" text="CONVERSOR" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
+      <Button fx:id="aEuro" layoutX="147.0" layoutY="89.0" mnemonicParsing="false" onAction="#dolarAEuro" text="DÓLAR - EURO" />
+      <Button fx:id="aDolar" layoutX="147.0" layoutY="119.0" mnemonicParsing="false" onAction="#euroADolar" text="EURO - DÓLAR" />
    </children>
 </AnchorPane>
