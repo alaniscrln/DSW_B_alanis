@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.iespuertodelacruz.alanissimoes.controlador.FXMLDocumentController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="203.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.iespuertodelacruz.alanissimoes.controlador.FXMLDocumentController">
+   <children>
+      <TextField fx:id="cantidad" layoutX="31.0" layoutY="106.0" prefHeight="25.0" prefWidth="104.0" />
+      <ChoiceBox fx:id="moneda" layoutX="144.0" layoutY="106.0" prefHeight="25.0" prefWidth="45.0" />
+      <Button fx:id="igual" layoutX="200.0" layoutY="106.0" mnemonicParsing="false" onAction="#calcular" prefHeight="25.0" prefWidth="45.0" text="=" />
+      <TextField fx:id="resultado" layoutX="254.0" layoutY="106.0" prefHeight="25.0" prefWidth="104.0" />
+      <Label layoutX="120.0" layoutY="16.0" prefHeight="61.0" prefWidth="143.0" text="CONVERSOR&#10;DOLAR - EURO" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
