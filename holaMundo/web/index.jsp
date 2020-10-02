@@ -15,6 +15,8 @@
         <h1>Hola mundo!</h1>
         <%
             out.println("Hola mundo desde jsp.");
+
+            
         %>
     </body>
 </html>
