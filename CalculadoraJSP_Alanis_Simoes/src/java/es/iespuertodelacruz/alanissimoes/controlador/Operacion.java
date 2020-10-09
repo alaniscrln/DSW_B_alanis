@@ -9,16 +9,7 @@ package es.iespuertodelacruz.alanissimoes.controlador;
  *
  * @author Alanis
  */
-public class Operacion {
-    
-    double num1;
-    double num2;
-    
-    //--------------------------------------------------------------------------
-
-    public Operacion() {
-
-    }
+public abstract class Operacion {
     
     public boolean sonNumeros(String num1, String num2){
         

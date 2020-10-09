@@ -9,15 +9,15 @@ package es.iespuertodelacruz.alanissimoes.controlador;
  *
  * @author Alanis
  */
-public class Suma extends Operacion {
+public class Division extends Operacion {
 
     //--------------------------------------------------------------------------
-    public Suma() {
+    public Division() {
 
     }
 
     //--------------------------------------------------------------------------
-    public double sumar(String num1, String num2) {
+    public double dividir(String num1, String num2) {
 
         double resultado, numero1, numero2;
 
@@ -31,7 +31,11 @@ public class Suma extends Operacion {
             numero2 = Double.NaN;
         }
         
-        resultado = numero1 + numero2;
+        if (numero2 == 0) {
+            numero2 = Double.NaN;
+        }
+        
+        resultado = numero1 / numero2;
 
         return resultado;
 

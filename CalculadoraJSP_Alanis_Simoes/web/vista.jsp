@@ -19,24 +19,18 @@
             <center> <h1>CALCULADORA JSP</h1> </center>
             <br>
             Número 1: <input type="text" name="num1"/> <br>
-            
-            Escoja operación: <br>
-            
-            <input type="radio" id="suma" name="operacion" value="suma"/>
-            <label for="suma"> + </label>
+
+            <label for="operacion">Escoja operación: </label>
+            <select name="operacion" id="operacion">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
             <br>
-            <input type="radio" id="resta" name="operacion" value="resta"/>
-            <label for="resta"> - </label>
-            <br>
-            <input type="radio" id="multiplicacion" name="operacion" value="multiplicacion"/>
-            <label for="multiplicacio"> * </label>
-            <br>
-            <input type="radio" id="division" name="operacion" value="division"/>
-            <label for="division"> / </label>
-            <br>
-            
+
             Número 2: <input type="text" name="num2"/> <br>
-            
+
             <input type="submit" value="calcular"/>
         </form>
 
