@@ -1,6 +1,6 @@
 <%-- 
     Document   : index
-    Created on : 08-oct-2020, 15:48:27
+    Created on : 16-oct-2020, 20:15:45
     Author     : Alanis
 --%>
 
@@ -9,14 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Calculadora JSP</title>
+        <title>Calculadora SERVLET</title>
     </head>
 
     <body>
 
-        <form action="mostrarResultado.jsp">
+        <form method="post" action="calcular">
 
-            <center> <h1>CALCULADORA JSP</h1> </center>
+            <center> <h1>CALCULADORA SERVLET</h1> </center>
             <br>
             Número 1: <input type="text" name="num1"/> <br>
 
@@ -31,7 +31,7 @@
 
             Número 2: <input type="text" name="num2"/> <br>
 
-            <input type="submit" value="calcular"/>
+            <input type="submit" name = "calcular" value="calcular"/>
         </form>
 
 
