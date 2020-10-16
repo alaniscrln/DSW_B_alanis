@@ -31,20 +31,20 @@ public class CalculadoraServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response, String mensaje)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CalculadoraServlet</title>");            
+            out.println("<html><head>");
+            out.println("<title>Calculadora</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CalculadoraServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            out.println("<center><h1>" + mensaje + "</h1></center>");
+            out.println("</body></html>");
+            out.close(); // cerramos
+
         }
     }
 
@@ -60,7 +60,7 @@ public class CalculadoraServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response, "");
     }
 
     /**
@@ -74,59 +74,38 @@ public class CalculadoraServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse resp)
             throws ServletException, IOException {
-        
-        
+
         String num1 = request.getParameter("num1");
         String operacion = request.getParameter("operacion");
         String num2 = request.getParameter("num2");
-        
-        
+
         char op = operacion.charAt(0);
-            double resultado;
-            switch (op) {
-                case '+':
-                    Suma suma = new Suma();
-                    resultado = suma.sumar(num1, num2);
-                    break;
-                case '-':
-                    Resta resta = new Resta();
-                    resultado = resta.restar(num1, num2);
-                    break;
-                case '*':
-                    Multiplicacion multiplicacion = new Multiplicacion();
-                    resultado = multiplicacion.multiplicar(num1, num2);
-                    break;
-                case '/':
-                    Division division = new Division();
-                    resultado = division.dividir(num1, num2);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-        
-            
-            response(resp, "El resultado es: " + resultado);
-        
-        //processRequest(request, response);
-        
-        
-        
+        double resultado;
+        switch (op) {
+            case '+':
+                Suma suma = new Suma();
+                resultado = suma.sumar(num1, num2);
+                break;
+            case '-':
+                Resta resta = new Resta();
+                resultado = resta.restar(num1, num2);
+                break;
+            case '*':
+                Multiplicacion multiplicacion = new Multiplicacion();
+                resultado = multiplicacion.multiplicar(num1, num2);
+                break;
+            case '/':
+                Division division = new Division();
+                resultado = division.dividir(num1, num2);
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        processRequest(request, resp, "El resultado es: " + resultado);
+
     }
 
-    private void response(HttpServletResponse resp, String mensaje) throws IOException {
-        
-        resp.setContentType("text/html"); // tipo de respuesta q voy a dar es html
-        PrintWriter out = resp.getWriter(); // va a pintar
-        out.println("<html><head>");
-        out.println("<title>A Sample Servlet!</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<center><h1>" + mensaje + "</h1></center>");
-        out.println("</body></html>");
-        out.close(); // cerramos
-    }
-    
-    
     /**
      * Returns a short description of the servlet.
      *
