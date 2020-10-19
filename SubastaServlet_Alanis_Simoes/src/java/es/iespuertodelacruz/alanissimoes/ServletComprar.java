@@ -35,10 +35,15 @@ public class ServletComprar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletComprar</title>");            
+            out.println("<title>Comprar</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletComprar at " + request.getContextPath() + "</h1>");
+            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main\">\n"
+                    + "<input type=\"hidden\" name=\"accion\" value=\"comprar\">\n"
+                    + "Valor:\n"
+                    + "<input name=\"valor\" value=\"\"><br>\n"
+                    + "<input type=\"submit\" value=\"Enviar\">\n"
+                    + "</form>");
             out.println("</body>");
             out.println("</html>");
         }
