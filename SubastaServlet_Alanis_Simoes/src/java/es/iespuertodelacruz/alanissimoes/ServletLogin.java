@@ -32,13 +32,23 @@ public class ServletLogin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletLogin</title>");            
+            out.println("<title>Inicia Sesión</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletLogin at " + request.getContextPath() + "</h1>");
+            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main\">\n"
+                    + "<input type=\"hidden\" name=\"accion\" value=\"validar\">\n"
+                    + "Login:\n"
+                    + "<input name=\"login\" value=\"\"><br>\n"
+                    + "Password:\n"
+                    + "<input name=\"password\" value=\"\"><br>\n"
+                    + "<input type=\"submit\" value=\"Enviar\">\n"
+                    + "<br>Si no estas registrado aún... "
+                    + "<a href=\"/SubastaServlet_Alanis_Simoes/registro\">Registrar</a>"
+                    + "</form>");
             out.println("</body>");
             out.println("</html>");
         }

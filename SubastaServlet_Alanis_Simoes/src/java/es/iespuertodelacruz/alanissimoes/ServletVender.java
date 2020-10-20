@@ -35,10 +35,17 @@ public class ServletVender extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletVender</title>");            
+            out.println("<title>Vender</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletVender at " + request.getContextPath() + "</h1>");
+            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main\">\n"
+                    + "<input type=\"hidden\" name=\"accion\" value=\"vender\">\n"
+                    + "Producto:\n"
+                    + "<input name=\"producto\" value=\"\"><br>\n"
+                    + "Valor:\n"
+                    + "<input name=\"valor\" value=\"\"><br>\n"
+                    + "<input type=\"submit\" value=\"Enviar\">\n"
+                    + "</form>");
             out.println("</body>");
             out.println("</html>");
         }

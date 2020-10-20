@@ -32,14 +32,20 @@ public class ServletRegistro extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+         
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletRegistro</title>");            
+            out.println("<title>Registro</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletRegistro at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
+            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main\">");
+            out.println("<input type=\"hidden\" name=\"accion\" value=\"registrar\">");
+            out.println("<br>Login:<input name=\"login\" value=\"\"><br>");
+            out.println("Password:<input name=\"password\" value=\"\"><br>");
+            out.println("E-mail: <input name=\"email\" value=\"\"><br>");
+            out.println("<input type=\"submit\" value=\"Enviar\">");
+            out.println("</form></body>");
             out.println("</html>");
         }
     }
