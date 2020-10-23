@@ -7,6 +7,8 @@ package es.iespuertodelacruz.alanissimoes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alanis
  */
 public class ServletMain extends HttpServlet {
+
+    ArrayList<Usuario> usuarios = new ArrayList<>();
+    Hashtable<String, ObjetoSubasta> articulos = new Hashtable<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +40,7 @@ public class ServletMain extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletMain</title>");            
+            out.println("<title>Servlet ServletMain</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServletMain at " + request.getContextPath() + "</h1>");
@@ -56,7 +61,45 @@ public class ServletMain extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String accion = request.getParameter("accion");
+
+        if (login == null || password == null || accion == null) {
+            response.sendRedirect("/subasta/login");
+        }
+
+        if (accion.equals("registrar")) {
+            String email = request.getParameter("email");
+            if (registraUsuario(login, password, email)) {
+                response.sendRedirect("/subasta/login");
+            } else {
+                response.sendRedirect("/subasta/registro");
+            }
+        } else if (accion.equals("validar")) {
+            if (!validaUsuario(login, password)) {
+                response.sendRedirect("/subasta/login");
+            }
+
+        } else if (accion.equals("comprar")) {
+            String producto = request.getParameter("producto");
+            double valor = Double.parseDouble(request.getParameter("valor"));
+
+            ObjetoSubasta obj = (ObjetoSubasta) articulos.get(producto);
+            if (obj.getValor() < valor) {
+                obj.setPuja(login, valor);
+                articulos.put(producto, obj);
+            }
+            response.sendRedirect("/subasta/main?accion=validar");
+        } else if (accion.equals("vender")) {
+            String producto = request.getParameter("producto");
+            double valor = Double.parseDouble(request.getParameter("valor"));
+            articulos.put(producto, new ObjetoSubasta(producto, valor, login));
+            response.sendRedirect("/subasta/main?accion=validar");
+        }
+
+        //processRequest(request, response);
     }
 
     /**
@@ -83,4 +126,134 @@ public class ServletMain extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public class Usuario {
+
+        private String login;
+        private String password;
+        private String email;
+
+//--------------------------------------------------------------------------
+        public Usuario(String login, String password, String email) {
+            this.login = login;
+            this.password = password;
+            this.email = email;
+        }
+
+        public String getLogin() {
+            return login;
+        }
+
+        public void setLogin(String login) {
+            this.login = login;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+    }
+
+    public boolean validaUsuario(String login, String password) {
+        if (buscaUsuario(login) != null) {  // usuario encontrado
+            Usuario usuario = buscaUsuario(login);
+            if (usuario.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        // usuario no encontrado / contraseña erronea
+        return false;
+    }
+
+    public boolean registraUsuario(String login, String password, String email) {
+
+        if (buscaUsuario(login) == null) {
+            Usuario usuario = new Usuario(login, password, email);
+            usuarios.add(usuario);
+            return true;
+        }
+        return false; // no pudo registrar usuario
+    }
+
+    public Usuario buscaUsuario(String login) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getLogin().equals(login)) {
+                return usuario;
+            }
+
+        }
+        return null;
+    }
+
+    public class ObjetoSubasta {
+
+        private String producto;
+        private double valor;
+        private String usuario;
+        private String propietario;
+
+        //----------------------------------------------------------------------------------
+        public ObjetoSubasta(String producto, double valor, String usuario, String propietario) {
+            this.producto = producto;
+            this.valor = valor;
+            this.usuario = usuario;
+            this.propietario = propietario;
+        }
+
+        public ObjetoSubasta(String producto, double valor, String propietario) {
+            this.producto = producto;
+            this.valor = valor;
+            this.propietario = propietario;
+        }
+
+        public String getProducto() {
+            return producto;
+        }
+
+        public void setProducto(String producto) {
+            this.producto = producto;
+        }
+
+        public double getValor() {
+            return valor;
+        }
+
+        public void setValor(double valor) {
+            this.valor = valor;
+        }
+
+        public String getUsuario() {
+            return usuario;
+        }
+
+        public void setUsuario(String usuario) {
+            this.usuario = usuario;
+        }
+
+        public String getPropietario() {
+            return propietario;
+        }
+
+        public void setPropietario(String propietario) {
+            this.propietario = propietario;
+        }
+
+        //----------------------------------------------------------------------------------
+        public void setPuja(String usuario, double valor) {
+            setUsuario(usuario);
+            setValor(valor);
+        }
+
+    }
 }
