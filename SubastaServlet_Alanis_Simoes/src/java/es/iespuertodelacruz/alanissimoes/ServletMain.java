@@ -8,6 +8,7 @@ package es.iespuertodelacruz.alanissimoes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +35,10 @@ public class ServletMain extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
+        response.setContentType("text/html");
+        response.setHeader("Refresh", "5");
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -43,7 +47,26 @@ public class ServletMain extends HttpServlet {
             out.println("<title>Servlet ServletMain</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletMain at " + request.getContextPath() + "</h1>");
+            out.println("<a href=\"/subasta/vender\">"
+                    + "Vender un articulo</a>");
+            out.println("<a href=\"/subasta/login\">"
+                    + "Salir</a>");
+
+            Enumeration elem = articulos.elements();
+            while (elem.hasMoreElements()) {
+                ObjetoSubasta os = (ObjetoSubasta) (elem.nextElement());
+                if (os.getPropietario().equals(login)) {
+                    out.println("<br><a href=\"/subasta/main?"
+                            + "accion=adjudicar&producto="
+                            + os.getProducto() + "\">Adjudicar</a> "
+                            + "<a href=\"/subasta/main?"
+                            + "accion=cancelar&producto="
+                            + os.getProducto() + "\">Cancelar</a> "
+                            + os.getProducto() + " (" + os.getValor()
+                            + ") [" + os.getUsuario() + "] ");
+                }
+            }
+
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,36 +93,55 @@ public class ServletMain extends HttpServlet {
             response.sendRedirect("/subasta/login");
         }
 
-        if (accion.equals("registrar")) {
-            String email = request.getParameter("email");
-            if (registraUsuario(login, password, email)) {
-                response.sendRedirect("/subasta/login");
-            } else {
-                response.sendRedirect("/subasta/registro");
+        switch (accion) {
+            case "registrar":
+                String email = request.getParameter("email");
+                if (registraUsuario(login, password, email)) {
+                    response.sendRedirect("/subasta/login");
+                } else {
+                    response.sendRedirect("/subasta/registro");
+                }
+                break;
+            //processRequest(request, response);
+            case "validar":
+                if (!validaUsuario(login, password)) {
+                    response.sendRedirect("/subasta/login");
+                }
+                break;
+            case "comprar": {
+                String producto = request.getParameter("producto");
+                double valor = Double.parseDouble(request.getParameter("valor"));
+                ObjetoSubasta obj = (ObjetoSubasta) articulos.get(producto);
+                if (obj.getValor() < valor) {
+                    obj.setPuja(login, valor);
+                    articulos.put(producto, obj);
+                }
+                response.sendRedirect("/subasta/main?accion=validar");
+                break;
             }
-        } else if (accion.equals("validar")) {
-            if (!validaUsuario(login, password)) {
-                response.sendRedirect("/subasta/login");
+            case "vender": {
+                String producto = request.getParameter("producto");
+                double valor = Double.parseDouble(request.getParameter("valor"));
+                articulos.put(producto, new ObjetoSubasta(producto, valor, login));
+                response.sendRedirect("/subasta/main?accion=validar");
+                break;
             }
-
-        } else if (accion.equals("comprar")) {
-            String producto = request.getParameter("producto");
-            double valor = Double.parseDouble(request.getParameter("valor"));
-
-            ObjetoSubasta obj = (ObjetoSubasta) articulos.get(producto);
-            if (obj.getValor() < valor) {
-                obj.setPuja(login, valor);
-                articulos.put(producto, obj);
+            case "adjudicar": {
+                String producto = request.getParameter("producto");
+                articulos.remove(producto);
+                response.sendRedirect("/subasta/main?accion=validar");
+                break;
             }
-            response.sendRedirect("/subasta/main?accion=validar");
-        } else if (accion.equals("vender")) {
-            String producto = request.getParameter("producto");
-            double valor = Double.parseDouble(request.getParameter("valor"));
-            articulos.put(producto, new ObjetoSubasta(producto, valor, login));
-            response.sendRedirect("/subasta/main?accion=validar");
+            case "cancelar": {
+                String producto = request.getParameter("producto");
+                articulos.remove(producto);
+                response.sendRedirect("/subasta/main?accion=validar");
+                break;
+            }
+            default:
+                break;
         }
 
-        //processRequest(request, response);
     }
 
     /**
