@@ -39,7 +39,7 @@ public class ServletRegistro extends HttpServlet {
             out.println("<title>Registro</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main\">");
+            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main?login=...&password=...\">");
             out.println("<input type=\"hidden\" name=\"accion\" value=\"registrar\">");
             out.println("<br>Login:<input name=\"login\" value=\"\"><br>");
             out.println("Password:<input name=\"password\" value=\"\"><br>");

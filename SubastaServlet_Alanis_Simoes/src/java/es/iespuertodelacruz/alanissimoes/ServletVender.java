@@ -38,7 +38,7 @@ public class ServletVender extends HttpServlet {
             out.println("<title>Vender</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main\">\n"
+            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main?login=...&password=...\">\n"
                     + "<input type=\"hidden\" name=\"accion\" value=\"vender\">\n"
                     + "Producto:\n"
                     + "<input name=\"producto\" value=\"\"><br>\n"

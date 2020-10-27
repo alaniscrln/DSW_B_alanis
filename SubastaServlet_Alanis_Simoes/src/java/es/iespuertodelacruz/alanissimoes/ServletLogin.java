@@ -39,7 +39,7 @@ public class ServletLogin extends HttpServlet {
             out.println("<title>Inicia Sesión</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main\">\n"
+            out.println("<form action=\"/SubastaServlet_Alanis_Simoes/main?login=...&password=...\">\n"
                     + "<input type=\"hidden\" name=\"accion\" value=\"validar\">\n"
                     + "Login:\n"
                     + "<input name=\"login\" value=\"\"><br>\n"
@@ -47,7 +47,7 @@ public class ServletLogin extends HttpServlet {
                     + "<input name=\"password\" value=\"\"><br>\n"
                     + "<input type=\"submit\" value=\"Enviar\">\n"
                     + "<br>Si no estas registrado aún... "
-                    + "<a href=\"/SubastaServlet_Alanis_Simoes/registro\">Registrar</a>"
+                    + "<a href=\"/SubastaServlet_Alanis_Simoes/registro?login=...&password=...\">Registrar</a>"
                     + "</form>");
             out.println("</body>");
             out.println("</html>");

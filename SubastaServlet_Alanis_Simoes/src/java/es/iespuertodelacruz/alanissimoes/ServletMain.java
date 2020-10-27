@@ -39,6 +39,9 @@ public class ServletMain extends HttpServlet {
         response.setContentType("text/html");
         response.setHeader("Refresh", "5");
 
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -67,6 +70,19 @@ public class ServletMain extends HttpServlet {
                 }
             }
 
+            elem = articulos.elements();
+            while (elem.hasMoreElements()) {
+                ObjetoSubasta os = (ObjetoSubasta) (elem.nextElement());
+                if (!os.getPropietario().equals(login)) {
+                    out.println("<br><a href=\"/subasta/comprar?producto="
+                            + os.getProducto()
+                            + "\">Comprar</a> "
+                            + os.getProducto() + " (" + os.getValor()
+                            + ") [" + os.getUsuario() + "] "
+                    );
+                }
+            }
+
             out.println("</body>");
             out.println("</html>");
         }
@@ -90,56 +106,57 @@ public class ServletMain extends HttpServlet {
         String accion = request.getParameter("accion");
 
         if (login == null || password == null || accion == null) {
-            response.sendRedirect("/subasta/login");
-        }
+            response.sendRedirect("/SubastaServlet_Alanis_Simoes/login");
+        } else {
 
-        switch (accion) {
-            case "registrar":
-                String email = request.getParameter("email");
-                if (registraUsuario(login, password, email)) {
-                    response.sendRedirect("/subasta/login");
-                } else {
-                    response.sendRedirect("/subasta/registro");
+            switch (accion) {
+                case "registrar":
+                    String email = request.getParameter("email");
+                    if (registraUsuario(login, password, email)) {
+                        response.sendRedirect("/SubastaServlet_Alanis_Simoes/login");
+                    } else {
+                        response.sendRedirect("/SubastaServlet_Alanis_Simoes/registro");
+                    }
+                    break;
+                //processRequest(request, response);
+                case "validar":
+                    if (!validaUsuario(login, password)) {
+                        response.sendRedirect("/SubastaServlet_Alanis_Simoes/login");
+                    }
+                    break;
+                case "comprar": {
+                    String producto = request.getParameter("producto");
+                    double valor = Double.parseDouble(request.getParameter("valor"));
+                    ObjetoSubasta obj = (ObjetoSubasta) articulos.get(producto);
+                    if (obj.getValor() < valor) {
+                        obj.setPuja(login, valor);
+                        articulos.put(producto, obj);
+                    }
+                    response.sendRedirect("/SubastaServlet_Alanis_Simoes/main?accion=validar");
+                    break;
                 }
-                break;
-            //processRequest(request, response);
-            case "validar":
-                if (!validaUsuario(login, password)) {
-                    response.sendRedirect("/subasta/login");
+                case "vender": {
+                    String producto = request.getParameter("producto");
+                    double valor = Double.parseDouble(request.getParameter("valor"));
+                    articulos.put(producto, new ObjetoSubasta(producto, valor, login));
+                    response.sendRedirect("/SubastaServlet_Alanis_Simoes/main?accion=validar");
+                    break;
                 }
-                break;
-            case "comprar": {
-                String producto = request.getParameter("producto");
-                double valor = Double.parseDouble(request.getParameter("valor"));
-                ObjetoSubasta obj = (ObjetoSubasta) articulos.get(producto);
-                if (obj.getValor() < valor) {
-                    obj.setPuja(login, valor);
-                    articulos.put(producto, obj);
+                case "adjudicar": {
+                    String producto = request.getParameter("producto");
+                    articulos.remove(producto);
+                    response.sendRedirect("/SubastaServlet_Alanis_Simoes/main?accion=validar");
+                    break;
                 }
-                response.sendRedirect("/subasta/main?accion=validar");
-                break;
+                case "cancelar": {
+                    String producto = request.getParameter("producto");
+                    articulos.remove(producto);
+                    response.sendRedirect("/SubastaServlet_Alanis_Simoes/main?accion=validar");
+                    break;
+                }
+                default:
+                    break;
             }
-            case "vender": {
-                String producto = request.getParameter("producto");
-                double valor = Double.parseDouble(request.getParameter("valor"));
-                articulos.put(producto, new ObjetoSubasta(producto, valor, login));
-                response.sendRedirect("/subasta/main?accion=validar");
-                break;
-            }
-            case "adjudicar": {
-                String producto = request.getParameter("producto");
-                articulos.remove(producto);
-                response.sendRedirect("/subasta/main?accion=validar");
-                break;
-            }
-            case "cancelar": {
-                String producto = request.getParameter("producto");
-                articulos.remove(producto);
-                response.sendRedirect("/subasta/main?accion=validar");
-                break;
-            }
-            default:
-                break;
         }
 
     }
