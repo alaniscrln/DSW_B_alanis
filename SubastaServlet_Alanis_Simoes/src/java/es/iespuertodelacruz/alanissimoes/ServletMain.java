@@ -50,19 +50,19 @@ public class ServletMain extends HttpServlet {
             out.println("<title>Servlet ServletMain</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<a href=\"/subasta/vender\">"
+            out.println("<a href=\"/SubastaServlet_Alanis_Simoes/vender\">"
                     + "Vender un articulo</a>");
-            out.println("<a href=\"/subasta/login\">"
+            out.println("<a href=\"/SubastaServlet_Alanis_Simoes/login\">"
                     + "Salir</a>");
 
             Enumeration elem = articulos.elements();
             while (elem.hasMoreElements()) {
                 ObjetoSubasta os = (ObjetoSubasta) (elem.nextElement());
                 if (os.getPropietario().equals(login)) {
-                    out.println("<br><a href=\"/subasta/main?"
+                    out.println("<br><a href=\"/SubastaServlet_Alanis_Simoes/main?"
                             + "accion=adjudicar&producto="
                             + os.getProducto() + "\">Adjudicar</a> "
-                            + "<a href=\"/subasta/main?"
+                            + "<a href=\"/SubastaServlet_Alanis_Simoes/main?"
                             + "accion=cancelar&producto="
                             + os.getProducto() + "\">Cancelar</a> "
                             + os.getProducto() + " (" + os.getValor()
@@ -118,10 +118,12 @@ public class ServletMain extends HttpServlet {
                         response.sendRedirect("/SubastaServlet_Alanis_Simoes/registro");
                     }
                     break;
-                //processRequest(request, response);
                 case "validar":
                     if (!validaUsuario(login, password)) {
                         response.sendRedirect("/SubastaServlet_Alanis_Simoes/login");
+                    }else{
+                        //response.sendRedirect("/SubastaServlet_Alanis_Simoes/main");
+                        processRequest(request, response);
                     }
                     break;
                 case "comprar": {
