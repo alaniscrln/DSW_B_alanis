@@ -1,4 +1,4 @@
-package es.iespuertolacruz.rest.alanissimoes.servicios;
+package es.iespuertodelacruz.rest.alanissimoes.servicios;
 
 import es.iespuertodelacruz.rest.alanissimoes.controlador.Multiplicacion;
 import javax.ws.rs.GET;
