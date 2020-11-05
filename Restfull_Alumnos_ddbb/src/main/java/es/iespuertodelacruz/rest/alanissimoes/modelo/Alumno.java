@@ -54,7 +54,7 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "Alumno:"+this.nombre+" " +this.apellidos +", nota:"+this.nota;
+        return this.id + ", "+ this.nombre + " " + this.apellidos + ", nota: " + this.nota;
     }
     
     //--------------------------------------------------------------------------
