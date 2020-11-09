@@ -12,7 +12,7 @@ public class AlumnoBBDD {
         String sql = "INSERT INTO alumnos (id, nombre, apellidos, nota) VALUES(?,?,?,?)";
 
         try {
-            Connection conn = ConexionInicioBBDD.openConnectSQLite();
+            Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.setString(2, nombre);
@@ -23,7 +23,7 @@ public class AlumnoBBDD {
             System.out.println("Se ha producido un error almacenando en la BBDD:" + e.getMessage());
         } finally {
 
-            ConexionInicioBBDD.closeConnectSQLite();
+            ConexionInicioPalabraBBDD.closeConnectSQLite();
         }
     }
 
@@ -32,7 +32,7 @@ public class AlumnoBBDD {
         Alumno alumno = new Alumno();
 
         try {
-            Connection conn = ConexionInicioBBDD.openConnectSQLite();
+            Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet resultSet = pstmt.executeQuery();
@@ -44,7 +44,7 @@ public class AlumnoBBDD {
         } catch (Exception e) {
             alumno = null;
         } finally {
-            ConexionInicioBBDD.closeConnectSQLite();
+            ConexionInicioPalabraBBDD.closeConnectSQLite();
             return alumno;
         }
     }
@@ -55,7 +55,7 @@ public class AlumnoBBDD {
         String result = "";
 
         try {
-            Connection conn = ConexionInicioBBDD.openConnectSQLite();
+            Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet resultSet = pstmt.executeQuery();
 
@@ -70,7 +70,7 @@ public class AlumnoBBDD {
         } catch (Exception e) {
             result = "ERROR";
         } finally {
-            ConexionInicioBBDD.closeConnectSQLite();
+            ConexionInicioPalabraBBDD.closeConnectSQLite();
             return result;
 
         }
@@ -81,7 +81,7 @@ public class AlumnoBBDD {
         boolean eliminado = true;
         String sql = "DELETE FROM alumnos WHERE id = ?";
         try {
-            Connection conn = ConexionInicioBBDD.openConnectSQLite();
+            Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
@@ -89,7 +89,7 @@ public class AlumnoBBDD {
             eliminado = false;
             System.out.println("no se elimina correctamente. " + e.getMessage());
         } finally {
-            ConexionInicioBBDD.closeConnectSQLite();
+            ConexionInicioPalabraBBDD.closeConnectSQLite();
             return eliminado;
 
         }
@@ -99,7 +99,7 @@ public class AlumnoBBDD {
         boolean actualizado = true;
         String sql = "UPDATE alumnos SET nombre = ? WHERE id = ?";
         try {
-            Connection conn = ConexionInicioBBDD.openConnectSQLite();
+            Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, nombre);
             pstmt.setInt(2, id);
@@ -108,7 +108,7 @@ public class AlumnoBBDD {
             System.out.println("no se actualiza :c. " + e.getMessage());
             actualizado = false;
         } finally {
-            ConexionInicioBBDD.closeConnectSQLite();
+            ConexionInicioPalabraBBDD.closeConnectSQLite();
             return actualizado;
 
         }
@@ -118,7 +118,7 @@ public class AlumnoBBDD {
         boolean actualizado = true;
         String sql = "UPDATE alumnos SET apellidos = ? WHERE id = ?";
         try {
-            Connection conn = ConexionInicioBBDD.openConnectSQLite();
+            Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, apellidos);
             pstmt.setInt(2, id);
@@ -126,7 +126,7 @@ public class AlumnoBBDD {
         } catch (Exception e) {
             actualizado = false;
         } finally {
-            ConexionInicioBBDD.closeConnectSQLite();
+            ConexionInicioPalabraBBDD.closeConnectSQLite();
             return actualizado;
 
         }
@@ -136,7 +136,7 @@ public class AlumnoBBDD {
         boolean actualizado = true;
         String sql = "UPDATE alumnos SET nota = ? WHERE id = ?";
         try {
-            Connection conn = ConexionInicioBBDD.openConnectSQLite();
+            Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, nota);
             pstmt.setInt(2, id);
@@ -144,7 +144,7 @@ public class AlumnoBBDD {
         } catch (Exception e) {
             actualizado = false;
         } finally {
-            ConexionInicioBBDD.closeConnectSQLite();
+            ConexionInicioPalabraBBDD.closeConnectSQLite();
             return actualizado;
         }
 

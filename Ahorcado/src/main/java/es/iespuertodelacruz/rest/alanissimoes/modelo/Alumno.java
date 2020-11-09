@@ -60,7 +60,7 @@ public class Alumno {
     //--------------------------------------------------------------------------
     
     public void almacenarBBDD(){
-        ConexionInicioBBDD.crearTabla();
+        ConexionInicioPalabraBBDD.crearTabla();
         AlumnoBBDD.insert(id, nombre, apellidos, nota);
     }
 
