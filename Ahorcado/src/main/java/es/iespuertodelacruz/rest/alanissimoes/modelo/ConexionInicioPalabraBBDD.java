@@ -50,11 +50,9 @@ public class ConexionInicioPalabraBBDD {
 
     public static void crearTabla() {
 
-        String sql = "CREATE TABLE IF NOT EXISTS ahorcado (\n"
-                + "id INTEGER PRIMARY KEY, \n"
-                + " nombre VARCHAR(100) NOT NULL,\n"
-                + " apellidos VARCHAR(100) NOT NULL,\n"
-                + " nota DOUBLE NOT NULL\n"
+        String sql = "CREATE TABLE IF NOT EXISTS palabra (\n"
+                + "palabra VARCHAR(200) PRIMARY KEY, \n"
+                + " haSidoUsada INTEGER NOT NULL\n" // sqlite no tiene boolean, se utiliza un int: 0 false, 1 true
                 + ");";
 
         try {

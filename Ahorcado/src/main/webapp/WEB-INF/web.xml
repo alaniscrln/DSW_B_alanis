@@ -4,7 +4,7 @@
 
 <web-app>
 
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>Juego del Ahorcado</display-name>
 
   <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
@@ -18,7 +18,7 @@
 
   <servlet-mapping>
     <servlet-name>jersey-serlvet</servlet-name>
-    <url-pattern>/rest/*</url-pattern>
+    <url-pattern>/ahorcado/*</url-pattern>
   </servlet-mapping>
 
 </web-app>
