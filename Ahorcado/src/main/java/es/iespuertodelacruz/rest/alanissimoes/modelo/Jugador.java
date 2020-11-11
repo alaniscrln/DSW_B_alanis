@@ -17,10 +17,11 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(int id, String nombre, int puntos) {
+    public Jugador(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.puntos = puntos;
+        this.puntos = 0;
+        almacenarBBDD();
     }
 
     //-----------------------------------------------------------------------------
@@ -60,8 +61,8 @@ public class Jugador {
      * Almacenar en la bbdd palabra el objeto palabra
      */
     public void almacenarBBDD(){
-        ConexionInicioPalabraBBDD.crearTabla();
-        JugadorBBDD.insert(getId(),getNombre(),getPuntos());
+        ConexionInicioJugadorBBDD.crearTabla();
+        JugadorBBDD.insert(getId(),getNombre());
     }    
     
 }

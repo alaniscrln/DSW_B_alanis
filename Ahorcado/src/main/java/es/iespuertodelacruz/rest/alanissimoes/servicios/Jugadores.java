@@ -5,7 +5,11 @@
  */
 package es.iespuertodelacruz.rest.alanissimoes.servicios;
 
+import es.iespuertodelacruz.rest.alanissimoes.modelo.Jugador;
+import es.iespuertodelacruz.rest.alanissimoes.modelo.JugadorBBDD;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
@@ -13,13 +17,13 @@ import javax.ws.rs.core.Response;
  *
  * @author Alanis
  */
-
 @Path("/jugador")
 public class Jugadores {
-    
+
     /**
      * Comprobar el funcionamiento del Servicio
-     * @return 
+     *
+     * @return
      */
     @GET
     @Path("/info")
@@ -28,11 +32,27 @@ public class Jugadores {
         return Response.status(200).entity(output).build();
     }
 
+    @POST
+    @Path("/crear-jugador")
+    public void crearJugador(int id, String nombre) {
+        try {
+            Jugador jugador = new Jugador(id, nombre);
+        } catch (Exception e) {
+            System.out.println("Error al crear al jugador " + nombre + ": " + e.getMessage() );
+        }
+    }
+
+    @DELETE
+    @Path("/eliminar-jugador")
+    public void eliminarJugador(int id){
+        JugadorBBDD.delete(id);
+    }
+    
+    
+    
     /*
     metodos a crear:
     crear jugador
-    getjugador
     eliminar jugador
-    */
-    
+     */
 }
