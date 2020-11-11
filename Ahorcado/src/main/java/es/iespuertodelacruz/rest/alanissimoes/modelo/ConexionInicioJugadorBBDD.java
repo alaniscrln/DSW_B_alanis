@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class ConexionInicioPalabraBBDD {
+/**
+ *
+ * @author Alanis
+ */
+public class ConexionInicioJugadorBBDD {
 
     static Connection conn = null;
 
@@ -20,14 +24,14 @@ public class ConexionInicioPalabraBBDD {
             if (conn != null && !conn.isClosed()) {
                 return conn;
             }
-            
+
             String url = "jdbc:sqlite:memory:db";
             conn = DriverManager.getConnection(url);
 
-            System.out.println("Se ha establecido la conexion con la BBDD palabra correctamente");
+            System.out.println("Se ha establecido la conexion con la BBDD jugador correctamente");
 
         } catch (Exception exception) {
-            System.out.println("Se ha producido un error realizando la conexion con la BBDD palabra:" + exception.getMessage());
+            System.out.println("Se ha producido un error realizando la conexion con la BBDD jugador:" + exception.getMessage());
         }
         return conn;
     }
@@ -42,7 +46,7 @@ public class ConexionInicioPalabraBBDD {
                 conn.close();
             }
         } catch (Exception exception) {
-            System.out.println("Se ha producido un error cerrando la conexion con la BBDD palabra:" + exception.getMessage());
+            System.out.println("Se ha producido un error cerrando la conexion con la BBDD jugador:" + exception.getMessage());
 
         }
 
@@ -50,9 +54,10 @@ public class ConexionInicioPalabraBBDD {
 
     public static void crearTabla() {
 
-        String sql = "CREATE TABLE IF NOT EXISTS palabra (\n"
-                + "palabra VARCHAR(200) PRIMARY KEY, \n"
-                + "haSidoUsada INTEGER NOT NULL\n" // sqlite no tiene boolean, se utiliza un int: 0 false, 1 true
+        String sql = "CREATE TABLE IF NOT EXISTS jugador (\n"
+                + "id INTEGER NOT NULL PRIMARY KEY, \n"
+                + "nombre VARCHAR(10),\n" // sqlite no tiene boolean, se utiliza un int: 0 false, 1 true
+                + "puntos INTEGER"
                 + ");";
 
         try {

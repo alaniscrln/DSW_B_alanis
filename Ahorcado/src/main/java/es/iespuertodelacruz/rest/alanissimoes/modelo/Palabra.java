@@ -34,21 +34,23 @@ public class Palabra {
         return haSidoUsada? 1:0;    // true:false
     }
 
-    public void setHaSidoUsada(boolean haSidoUsada) {
-        this.haSidoUsada = haSidoUsada;
+    public void setHaSidoUsada(int haSidoUsada) {
+        this.haSidoUsada = (haSidoUsada == 1);
     }
+
+    //-----------------------------------------------------------------------------
 
     @Override
     public String toString() {
         return "Palabra: " + getPalabra() + "\nHa sido usada: " + (HaSidoUsada()==1);
     }
-
-    //-----------------------------------------------------------------------------
     
+    /**
+     * Almacenar en la bbdd palabra el objeto palabra
+     */
     public void almacenarBBDD(){
         ConexionInicioPalabraBBDD.crearTabla();
         PalabraBBDD.insert(getPalabra(),HaSidoUsada());
     }
-
     
 }
