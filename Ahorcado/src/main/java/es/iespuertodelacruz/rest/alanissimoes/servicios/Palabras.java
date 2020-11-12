@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -18,7 +19,8 @@ public class Palabras {
 
     /**
      * Comprobar el funcionamiento del Servicio
-     * @return 
+     *
+     * @return
      */
     @GET
     @Path("/info")
@@ -33,9 +35,23 @@ public class Palabras {
      * @param p palabra a crear y usar
      * @return objeto de la palabra creada
      */
+//    @POST
+//    @Path("/insert")
+//    public Palabra usarPalabra(@QueryParam("p") String p) {
+//        Palabra palabra = new Palabra();
+//        try {
+//            palabra.setPalabra(p);
+//            palabra.setHaSidoUsada(1); // 1 porque la usaremos
+//            PalabraBBDD.insert(p, palabra.HaSidoUsada());
+//        } catch (Exception e) {
+//            palabra = null;
+//            System.out.println("Error al crear la palabra : " + e.getMessage());
+//        }
+//        return palabra;
+//    }
     @POST
     @Path("/insert")
-    public Palabra usarPalabra(String p) {
+    public String usarPalabra(@QueryParam("p") String p) {
         Palabra palabra = new Palabra();
         try {
             palabra.setPalabra(p);
@@ -45,11 +61,12 @@ public class Palabras {
             palabra = null;
             System.out.println("Error al crear la palabra : " + e.getMessage());
         }
-        return palabra;
+        return palabra.toString();
     }
 
     /**
      * Usar una palabra random de la bbdd
+     *
      * @return objeto de la palabra seleccionada
      */
     @GET

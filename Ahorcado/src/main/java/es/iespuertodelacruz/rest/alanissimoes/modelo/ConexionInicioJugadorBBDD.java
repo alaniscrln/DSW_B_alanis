@@ -25,7 +25,7 @@ public class ConexionInicioJugadorBBDD {
                 return conn;
             }
 
-            String url = "jdbc:sqlite:memory:db";
+            String url = "jdbc:sqlite:memory:jugador";
             conn = DriverManager.getConnection(url);
 
             System.out.println("Se ha establecido la conexion con la BBDD jugador correctamente");

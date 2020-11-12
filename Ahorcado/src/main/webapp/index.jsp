@@ -6,10 +6,18 @@
 
         <h1><center>AHORCADO</center></h1>
         <br/>
-        <form action="/palabra">
-            
-            
+        <form action="ahorcado/palabra/insert?p=palabra">
+            <center>
+                <input type="text" id="palabra" name="palabra"><br>
+                <input type="submit" value="¡A jugar!">
+            </center>        
         </form>
-        
+
+        <form action="ahorcado/palabra/random"> 
+            <center>
+                <input type="submit" value="Elegir palabra aleatoria">
+            </center>
+        </form>
+
     </body>
 </html>

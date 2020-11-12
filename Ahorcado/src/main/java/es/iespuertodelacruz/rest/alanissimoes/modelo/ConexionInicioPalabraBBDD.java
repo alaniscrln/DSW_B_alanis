@@ -21,7 +21,7 @@ public class ConexionInicioPalabraBBDD {
                 return conn;
             }
             
-            String url = "jdbc:sqlite:memory:db";
+            String url = "jdbc:sqlite:memory:palabra";
             conn = DriverManager.getConnection(url);
 
             System.out.println("Se ha establecido la conexion con la BBDD palabra correctamente");
@@ -60,7 +60,7 @@ public class ConexionInicioPalabraBBDD {
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Fallo en crear tabla palabra: " + e.getMessage());
         } finally {
             closeConnectSQLite();
         }
