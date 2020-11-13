@@ -1,5 +1,6 @@
 package es.iespuertodelacruz.rest.alanissimoes.servicios;
 
+import es.iespuertodelacruz.rest.alanissimoes.modelo.ConexionInicioPalabraBBDD;
 import es.iespuertodelacruz.rest.alanissimoes.modelo.Palabra;
 import es.iespuertodelacruz.rest.alanissimoes.modelo.PalabraBBDD;
 import javax.ws.rs.GET;
@@ -35,26 +36,12 @@ public class Palabras {
      * @param p palabra a crear y usar
      * @return objeto de la palabra creada
      */
-//    @POST
-//    @Path("/insert")
-//    public Palabra usarPalabra(@QueryParam("p") String p) {
-//        Palabra palabra = new Palabra();
-//        try {
-//            palabra.setPalabra(p);
-//            palabra.setHaSidoUsada(1); // 1 porque la usaremos
-//            PalabraBBDD.insert(p, palabra.HaSidoUsada());
-//        } catch (Exception e) {
-//            palabra = null;
-//            System.out.println("Error al crear la palabra : " + e.getMessage());
-//        }
-//        return palabra;
-//    }
     @POST
     @Path("/insert")
-    public String usarPalabra(@QueryParam("p") String p) {
+    public Palabra usarPalabra(@QueryParam("p") String p) {
         Palabra palabra = new Palabra();
         try {
-            System.out.println(p);
+            ConexionInicioPalabraBBDD.crearTabla();
             palabra.setPalabra(p);
             palabra.setHaSidoUsada(1); // 1 porque la usaremos
             PalabraBBDD.insert(p, palabra.HaSidoUsada());
@@ -62,8 +49,24 @@ public class Palabras {
             palabra = null;
             System.out.println("Error al crear la palabra : " + e.getMessage());
         }
-        return palabra.toString();
+        return palabra;
     }
+//    @POST
+//    @Path("/insert")
+//    public String usarPalabra(@QueryParam("p") String p) {
+//        Palabra palabra = new Palabra();
+//        try {
+//            ConexionInicioPalabraBBDD.crearTabla();
+//            System.out.println(p);
+//            palabra.setPalabra(p);
+//            palabra.setHaSidoUsada(1); // 1 porque la usaremos
+//            PalabraBBDD.insert(p, palabra.HaSidoUsada());
+//        } catch (Exception e) {
+//            palabra = null;
+//            System.out.println("Error al crear la palabra : " + e.getMessage());
+//        }
+//        return palabra.toString();
+//    }
 
     /**
      * Usar una palabra random de la bbdd

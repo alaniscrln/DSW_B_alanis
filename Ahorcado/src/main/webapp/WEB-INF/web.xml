@@ -4,21 +4,26 @@
 
 <web-app>
 
-  <display-name>Juego del Ahorcado</display-name>
+    <display-name>Juego del Ahorcado</display-name>
 
-  <servlet>
-    <servlet-name>jersey-serlvet</servlet-name>
-    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-    <init-param>
-      <param-name>com.sun.jersey.config.property.packages</param-name>
-      <param-value>es.iespuertodelacruz.rest.alanissimoes.servicios</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
+    <servlet>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>es.iespuertodelacruz.rest.alanissimoes.servicios</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>jersey-serlvet</servlet-name>
-    <url-pattern>/ahorcado/*</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <url-pattern>/ahorcado/*</url-pattern>
+    </servlet-mapping>
 
+    <listener>
+        <listener-class>
+            es.iespuertodelacruz.rest.alanissimoes.modelo.InitServletContextListenerBBDD
+        </listener-class>
+    </listener>
 </web-app>
