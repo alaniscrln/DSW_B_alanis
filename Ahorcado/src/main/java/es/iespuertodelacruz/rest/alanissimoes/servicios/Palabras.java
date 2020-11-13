@@ -54,6 +54,7 @@ public class Palabras {
     public String usarPalabra(@QueryParam("p") String p) {
         Palabra palabra = new Palabra();
         try {
+            System.out.println(p);
             palabra.setPalabra(p);
             palabra.setHaSidoUsada(1); // 1 porque la usaremos
             PalabraBBDD.insert(p, palabra.HaSidoUsada());

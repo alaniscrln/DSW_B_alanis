@@ -150,4 +150,17 @@ public class AlumnoBBDD {
 
     }
 
+    public static void drop() {
+        String sql = "DROP TABLE alumnos";
+        try {
+            Connection conn = ConexionInicioBBDD.openConnectSQLite();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("no se elimina");
+        } finally {
+            ConexionInicioBBDD.closeConnectSQLite();
+        }
+    }
+
 }

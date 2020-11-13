@@ -6,9 +6,9 @@
 
         <h1><center>AHORCADO</center></h1>
         <br/>
-        <form action="ahorcado/palabra/insert?p=palabra">
+        <form action="ahorcado/palabra/insert">
             <center>
-                <input type="text" id="palabra" name="palabra"><br>
+                <input type="text" id="palabra" name="p"><br><br>
                 <input type="submit" value="¡A jugar!">
             </center>        
         </form>

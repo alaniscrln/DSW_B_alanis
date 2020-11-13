@@ -17,7 +17,7 @@ public class PalabraBBDD {
      * @param haSidoUsada saber si ha sido usada antes
      */
     public static void insert(String palabra, int haSidoUsada){
-        String sql = "INSERT INTO palabra (palabra, haSidoUsada) VALUES(?,?)";
+        String sql = "INSERT INTO palabras (palabra, haSidoUsada) VALUES(?,?)";
 
         try {
             Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
@@ -26,7 +26,7 @@ public class PalabraBBDD {
             pstmt.setInt(2, haSidoUsada);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Se ha producido un error almacenando en la BBDD palabra:" + e.getMessage());
+            System.out.println("Se ha producido un error almacenando en la BBDD palabra:" + e.getMessage() + "-------" + e.getSQLState());
         } finally {
 
             ConexionInicioPalabraBBDD.closeConnectSQLite();
@@ -38,7 +38,7 @@ public class PalabraBBDD {
      * @return palabra seleccionada
      */
     public static Palabra selectRandom(){
-        String sql = "SELECT * FROM palabra ORDER BY RANDOM() LIMIT 1";
+        String sql = "SELECT * FROM palabras ORDER BY RANDOM() LIMIT 1";
         Palabra palabra = new Palabra();
         
         try {

@@ -50,7 +50,8 @@ public class Palabra {
      */
     public void almacenarBBDD(){
         ConexionInicioPalabraBBDD.crearTabla();
-        PalabraBBDD.insert(getPalabra(),HaSidoUsada());
+        int usada = this.haSidoUsada? 1:0;
+        PalabraBBDD.insert(this.palabra, usada);
     }
     
 }

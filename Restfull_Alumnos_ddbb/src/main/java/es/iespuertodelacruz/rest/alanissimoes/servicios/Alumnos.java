@@ -17,6 +17,12 @@ public class Alumnos {
         String output = "Servicio Alumnos OK ";
         return Response.status(200).entity(output).build();
     }
+    
+    @GET
+    @Path("/del")
+    public void borrarBBDD(){
+        AlumnoBBDD.drop();
+    }
 
     @GET
     @Path("/mostrar-alumnos")
