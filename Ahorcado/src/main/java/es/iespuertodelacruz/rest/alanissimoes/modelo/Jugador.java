@@ -61,7 +61,7 @@ public class Jugador {
      * Almacenar en la bbdd palabra el objeto palabra
      */
     public void almacenarBBDD(){
-        ConexionInicioJugadorBBDD.crearTabla();
+        ConexionInicioAhorcadoBBDD.crearTablaJugador();
         JugadorBBDD.insert(getId(),getNombre());
     }    
     

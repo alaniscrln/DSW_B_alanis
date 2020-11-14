@@ -19,7 +19,10 @@ public class InitServletContextListenerBBDD implements ServletContextListener {
         System.out.println("ServletContextListener destroyed");
     }
 
-    //Run this before web application is started
+    /**
+     * Se ejecuta nada más ejecutar el proyecto automaticamente
+     * @param arg0 
+     */
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
         System.out.println("Creando bbdd y sus tablas jugdor y palabra");

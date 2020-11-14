@@ -20,7 +20,7 @@ public class PalabraBBDD {
         String sql = "INSERT INTO palabras (palabra, haSidoUsada) VALUES(?,?)";
 
         try {
-            Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
+            Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, palabra);
             pstmt.setInt(2, haSidoUsada);
@@ -28,8 +28,7 @@ public class PalabraBBDD {
         } catch (SQLException e) {
             System.out.println("Se ha producido un error almacenando en la BBDD palabra:" + e.getMessage() + "-------" + e.getSQLState());
         } finally {
-
-            ConexionInicioPalabraBBDD.closeConnectSQLite();
+            ConexionInicioAhorcadoBBDD.closeConnectSQLite();
         }
     }
     
@@ -42,7 +41,7 @@ public class PalabraBBDD {
         Palabra palabra = new Palabra();
         
         try {
-            Connection conn = ConexionInicioPalabraBBDD.openConnectSQLite();
+            Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet resultSet = pstmt.executeQuery();
 
@@ -53,7 +52,7 @@ public class PalabraBBDD {
             palabra = null;
             System.out.println("Error en selectRandom: " + e.getMessage());
         } finally {
-            ConexionInicioPalabraBBDD.closeConnectSQLite();
+            ConexionInicioAhorcadoBBDD.closeConnectSQLite();
             return palabra;
         }
     }

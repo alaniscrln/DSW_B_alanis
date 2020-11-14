@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package es.iespuertodelacruz.rest.alanissimoes.servicios;
 
 import es.iespuertodelacruz.rest.alanissimoes.modelo.Jugador;
@@ -11,6 +6,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 /**
@@ -34,7 +30,7 @@ public class Jugadores {
 
     @POST
     @Path("/crear-jugador")
-    public void crearJugador(int id, String nombre) {
+    public void crearJugador(@QueryParam("id")int id, @QueryParam("nombre") String nombre) {
         try {
             Jugador jugador = new Jugador(id, nombre);
         } catch (Exception e) {
@@ -44,7 +40,7 @@ public class Jugadores {
 
     @DELETE
     @Path("/eliminar-jugador")
-    public void eliminarJugador(int id){
+    public void eliminarJugador(@QueryParam("id") int id){
         JugadorBBDD.delete(id);
     }
     

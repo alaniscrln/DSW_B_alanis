@@ -9,14 +9,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Palabra {
     private String palabra;
-    private boolean haSidoUsada;
+    private int haSidoUsada;
 
     public Palabra() {
     }
 
     public Palabra(String palabra, int haSidoUsada) {
         this.palabra = palabra;        
-        this.haSidoUsada = (haSidoUsada == 1);  // 0 = false, 1 = true
+        this.haSidoUsada = haSidoUsada;  // 0 = false, 1 = true
         almacenarBBDD();
     }
     
@@ -31,11 +31,11 @@ public class Palabra {
     }
 
     public int HaSidoUsada() {
-        return haSidoUsada? 1:0;    // true:false
+        return haSidoUsada;    
     }
 
     public void setHaSidoUsada(int haSidoUsada) {
-        this.haSidoUsada = (haSidoUsada == 1);
+        this.haSidoUsada = haSidoUsada;
     }
 
     //-----------------------------------------------------------------------------
@@ -49,9 +49,8 @@ public class Palabra {
      * Almacenar en la bbdd palabra el objeto palabra
      */
     public void almacenarBBDD(){
-        ConexionInicioPalabraBBDD.crearTabla();
-        int usada = this.haSidoUsada? 1:0;
-        PalabraBBDD.insert(this.palabra, usada);
+        ConexionInicioAhorcadoBBDD.crearTablaPalabra();
+        PalabraBBDD.insert(this.palabra, this.haSidoUsada);
     }
     
 }

@@ -8,7 +8,7 @@
         <br/>
         <form action="ahorcado/palabra/insert">
             <center>
-                <input type="text" id="palabra" name="p"><br><br>
+                <input type="text" id="palabra" name="p" size="50"><br><br>
                 <input type="submit" value="¡A jugar!">
             </center>        
         </form>

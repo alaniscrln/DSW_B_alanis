@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package es.iespuertodelacruz.rest.alanissimoes.modelo;
 
 import java.sql.Connection;
@@ -30,7 +25,7 @@ public class ConexionInicioAhorcadoBBDD {
                 return conn;
             }
 
-            String url = "jdbc:sqlite:memory:ahorcado.db";
+            String url = "jdbc:sqlite:ahorcado.db";
             conn = DriverManager.getConnection(url);
 
             System.out.println("Se ha establecido la conexion con la BBDD ahorcado correctamente");

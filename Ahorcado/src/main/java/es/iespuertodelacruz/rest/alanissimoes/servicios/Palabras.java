@@ -1,6 +1,5 @@
 package es.iespuertodelacruz.rest.alanissimoes.servicios;
 
-import es.iespuertodelacruz.rest.alanissimoes.modelo.ConexionInicioPalabraBBDD;
 import es.iespuertodelacruz.rest.alanissimoes.modelo.Palabra;
 import es.iespuertodelacruz.rest.alanissimoes.modelo.PalabraBBDD;
 import javax.ws.rs.GET;
@@ -41,7 +40,6 @@ public class Palabras {
     public Palabra usarPalabra(@QueryParam("p") String p) {
         Palabra palabra = new Palabra();
         try {
-            ConexionInicioPalabraBBDD.crearTabla();
             palabra.setPalabra(p);
             palabra.setHaSidoUsada(1); // 1 porque la usaremos
             PalabraBBDD.insert(p, palabra.HaSidoUsada());
