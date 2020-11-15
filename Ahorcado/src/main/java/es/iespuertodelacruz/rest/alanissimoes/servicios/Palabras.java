@@ -28,7 +28,7 @@ public class Palabras {
         String output = "Servicio Palabras OK ";
         return Response.status(200).entity(output).build();
     }
-
+    
     /**
      * Crear una palabra, guardarla en la bbdd y usarla
      *
@@ -37,7 +37,7 @@ public class Palabras {
      */
     @POST
     @Path("/insert")
-    public Palabra usarPalabra(@QueryParam("p") String p) {
+    public String usarPalabra(@QueryParam("p") String p) {
         Palabra palabra = new Palabra();
         try {
             palabra.setPalabra(p);
@@ -47,7 +47,7 @@ public class Palabras {
             palabra = null;
             System.out.println("Error al crear la palabra : " + e.getMessage());
         }
-        return palabra;
+        return palabra.getPalabra();
     }
 //    @POST
 //    @Path("/insert")
@@ -74,10 +74,10 @@ public class Palabras {
     @GET
     @Path("/random")
     @Produces({MediaType.APPLICATION_XML})
-    public Palabra usarPalabraRandom() {
+    public String usarPalabraRandom() {
         Palabra palabra = PalabraBBDD.selectRandom();
         palabra.setHaSidoUsada(1);
-        return palabra;
+        return palabra.getPalabra();
     }
 
 }
