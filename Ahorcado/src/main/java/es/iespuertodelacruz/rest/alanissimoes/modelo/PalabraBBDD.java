@@ -23,8 +23,9 @@ public class PalabraBBDD {
             pstmt.setString(1, palabra);
             pstmt.setInt(2, haSidoUsada);
             pstmt.executeUpdate();
+            System.out.println("Palabra almacenada en la BBDD");
         } catch (SQLException e) {
-            System.out.println("Se ha producido un error almacenando en la BBDD palabra:" + e.getMessage() + "-------" + e.getSQLState());
+            System.out.println("Se ha producido un error almacenando en la tabla palabra:" + e.getMessage() + "-------" + e.getSQLState());
         } finally {
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
         }
@@ -47,10 +48,10 @@ public class PalabraBBDD {
 
             palabra.setPalabra(resultSet.getString("palabra"));
             palabra.setHaSidoUsada(resultSet.getInt("haSidoUsada"));
-
+            System.out.println("Palabra aleatoria obtenida");
         } catch (Exception e) {
             palabra = null;
-            System.out.println("Error en selectRandom: " + e.getMessage());
+            System.out.println("Error al obtener palabra aleatoria: " + e.getMessage());
         } finally {
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
             return palabra;
@@ -72,8 +73,9 @@ public class PalabraBBDD {
             pstmt.setInt(1, 1);
             pstmt.setString(2, palabra);
             pstmt.executeUpdate();
+            System.out.println("Actualizar haSidoUsada en palabra");
         } catch (Exception e) {
-            System.out.println("no se actualiza la palabra: " + e.getMessage());
+            System.out.println("No se actualiza haSidoUsada en palabra: " + e.getMessage());
         } finally {
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
         }
@@ -97,10 +99,10 @@ public class PalabraBBDD {
 
             p.setPalabra(resultSet.getString("palabra"));
             p.setHaSidoUsada(resultSet.getInt("haSidoUsada"));
-
+            System.out.println("Palabra obtenida");
         } catch (Exception e) {
             p = null;
-            System.out.println("Error en selectPalabra: " + e.getMessage());
+            System.out.println("Error al obtener palabra: " + e.getMessage());
         } finally {
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
             return p;
@@ -117,9 +119,9 @@ public class PalabraBBDD {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-            System.out.println("Palabras reseteadas.");
+            System.out.println("Palabras reestablecidas a no usadas.");
         } catch (Exception e) {
-            System.out.println("no se resetean las palabras: " + e.getMessage());
+            System.out.println("Error al reestablecer las palabras: " + e.getMessage());
         } finally {
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
         }

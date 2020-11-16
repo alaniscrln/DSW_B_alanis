@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.alanissimoes;
+package es.iespuertodelacruz.alanissimoes.controlador;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 

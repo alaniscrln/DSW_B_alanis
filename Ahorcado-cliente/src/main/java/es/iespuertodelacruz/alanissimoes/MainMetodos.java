@@ -1,5 +1,7 @@
 package es.iespuertodelacruz.alanissimoes;
 
+import es.iespuertodelacruz.alanissimoes.controlador.PalabrasCliente;
+import es.iespuertodelacruz.alanissimoes.controlador.JugadoresCliente;
 import java.util.ArrayList;
 import java.util.Scanner;
 

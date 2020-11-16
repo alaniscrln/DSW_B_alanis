@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.alanissimoes;
+package es.iespuertodelacruz.alanissimoes.controlador;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

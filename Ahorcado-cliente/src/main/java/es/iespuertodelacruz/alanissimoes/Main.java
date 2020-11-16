@@ -1,5 +1,7 @@
 package es.iespuertodelacruz.alanissimoes;
 
+import es.iespuertodelacruz.alanissimoes.controlador.JugadoresCliente;
+import es.iespuertodelacruz.alanissimoes.controlador.Jugador;
 import java.util.Scanner;
 
 public class Main {
