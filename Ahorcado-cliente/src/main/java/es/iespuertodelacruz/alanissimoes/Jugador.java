@@ -2,10 +2,6 @@ package es.iespuertodelacruz.alanissimoes;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-/**
- *
- * @author Alanis
- */
 @JsonRootName(value = "jugador")
 public class Jugador {
     private String nombre;

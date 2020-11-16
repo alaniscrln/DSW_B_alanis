@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package es.iespuertodelacruz.rest.alanissimoes.modelo;
 
 import java.sql.Connection;
@@ -10,16 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author Alanis
- */
 public class JugadorBBDD {
 
     /**
      * Insertar jugador en la bbdd jugador
      *
      * @param nombre nombre del jugador
+     * @throws java.lang.Exception
      */
     public static void insert(String nombre) throws Exception{
         String sql = "INSERT INTO jugador (nombre, puntos) VALUES(?,?)";
@@ -40,7 +32,6 @@ public class JugadorBBDD {
     /**
      * Eliminar jugador de la bbdd jugador
      *
-     * @param nombre nombre del jugador
      * @throws java.lang.Exception
      */
     public static void deleteJugadores() throws Exception{
@@ -80,9 +71,10 @@ public class JugadorBBDD {
     }
 
     /**
-     * Conocer los puntos actuales del jugador
-     * @param id id del jugador
-     * @return puntos actuales del jugador
+     * Seleccionar los puntos de un jugador
+     * @param nombre nombre del jugador
+     * @return puntos del jugador
+     * @throws Exception 
      */
     private static int selectPuntos(String nombre) throws Exception{
         String sql = "SELECT puntos FROM jugador WHERE nombre = ?";
@@ -102,6 +94,12 @@ public class JugadorBBDD {
         return puntos;
     }
     
+    /**
+     * Obtiene el jugador indicado de la BBDD
+     * @param nombre nombre del jugador
+     * @return objeto del jugador solicitado
+     * @throws Exception 
+     */
     public static Jugador selectJugador(String nombre) throws Exception {
         String sql = "SELECT * FROM jugador WHERE nombre = ?";
 

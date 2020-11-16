@@ -5,10 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author Alanis
- */
 public class PalabraBBDD {
 
     /**
@@ -16,6 +12,7 @@ public class PalabraBBDD {
      *
      * @param palabra palabra a insertar
      * @param haSidoUsada saber si ha sido usada antes
+     * @throws java.lang.Exception
      */
     public static void insert(String palabra, int haSidoUsada) throws Exception {
         String sql = "INSERT INTO palabras (palabra, haSidoUsada) VALUES(?,?)";
@@ -37,6 +34,7 @@ public class PalabraBBDD {
      * Seleccionar una palabra aleatoria de la bbdd palabras
      *
      * @return palabra seleccionada
+     * @throws java.lang.Exception
      */
     public static Palabra selectRandom() throws Exception {
         String sql = "SELECT * FROM palabras WHERE haSidoUsada = 0 ORDER BY RANDOM() LIMIT 1";
@@ -63,6 +61,7 @@ public class PalabraBBDD {
      * Actualizar 'haSidoUsada' en la bbdd palabras
      *
      * @param palabra
+     * @throws java.lang.Exception
      */
     public static void updateHaSidoUsada(String palabra) throws Exception {
 
@@ -80,6 +79,12 @@ public class PalabraBBDD {
         }
     }
 
+    /**
+     * Obtener palabra de la bbdd palabras
+     * @param palabra atributo palabra de la palabra a obtener
+     * @return objeto palabra
+     * @throws Exception 
+     */
     public static Palabra selectPalabra(String palabra) throws Exception {
         String sql = "SELECT * FROM palabras WHERE palabra = ?";
 
@@ -102,7 +107,11 @@ public class PalabraBBDD {
         }
     }
     
-    public static void updateResetPalabras(){
+    /**
+     * Establecer 'haSidoUsada' a '0' en todas las palabras de la BBDD palabras
+     * @throws java.lang.Exception
+     */
+    public static void updateResetPalabras() throws Exception{
         String sql = "UPDATE palabras SET haSidoUsada = 0 WHERE haSidoUsada = 1";
         try {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();

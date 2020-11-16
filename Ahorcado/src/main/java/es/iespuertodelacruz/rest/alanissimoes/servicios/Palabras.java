@@ -2,8 +2,6 @@ package es.iespuertodelacruz.rest.alanissimoes.servicios;
 
 import es.iespuertodelacruz.rest.alanissimoes.modelo.Palabra;
 import es.iespuertodelacruz.rest.alanissimoes.modelo.PalabraBBDD;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,10 +12,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- *
- * @author Alanis
- */
 @Path("/palabra")
 public class Palabras {
 
@@ -33,6 +27,11 @@ public class Palabras {
         return Response.status(200).entity(output).build();
     }
 
+    /**
+     * Obtener palabra por palabra
+     * @param palabra palabra
+     * @return objeto de la palabra
+     */
     @GET
     @Path("/get")
     @Produces("application/json")
@@ -47,6 +46,7 @@ public class Palabras {
             return p;
         }
     }
+    
     /**
      * Crear una palabra, guardarla en la bbdd y usarla
      *
@@ -71,13 +71,13 @@ public class Palabras {
     /**
      * Usar una palabra random de la bbdd
      *
-     * @return objeto de la palabra seleccionada
+     * @return palabra de la palabra objeto seleccionada
      */
     @GET
     @Path("/random")
     //@Produces({MediaType.APPLICATION_XML})
     public String usarPalabraRandom() {
-        Palabra palabra = new Palabra();
+        Palabra palabra;
         try {
             palabra = PalabraBBDD.selectRandom();
             palabra.setHaSidoUsada(1);
@@ -91,7 +91,7 @@ public class Palabras {
     /**
      * Actualizar valor palabra haSidoUsada
      * @param p palabra a actualizar
-     * @return 
+     * @return confirmación de que ha sido actualizada
      */
     @PUT
     @Path("/update")
@@ -109,6 +109,10 @@ public class Palabras {
         }
     }
     
+    /**
+     * Reestablecer las palabras a no han sido usadas
+     * @return confirmación de que han sido restablecidas
+     */
     @PUT
     @Path("/reset")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -124,4 +128,5 @@ public class Palabras {
             return str;
         }
     }
+    
 }

@@ -13,10 +13,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- *
- * @author Alanis
- */
 @Path("/jugador")
 public class Jugadores {
 
@@ -32,6 +28,11 @@ public class Jugadores {
         return Response.status(200).entity(output).build();
     }
     
+    /**
+     * Obtener jugador por nombre de la BBDD jugador
+     * @param nombre nombre del jugador a obtner
+     * @return objeto del jugador
+     */
     @GET
     @Path("/get")
     @Produces("application/json")
@@ -47,6 +48,11 @@ public class Jugadores {
         }
     }
 
+    /**
+     * Crear jugador en la BBDD jugador
+     * @param nombre nombre del jugador
+     * @return objeto jugador creado
+     */
     @POST
     @Path("/crear")
     public Jugador crearJugador(@QueryParam("nombre") String nombre) {
@@ -62,6 +68,10 @@ public class Jugadores {
         return jugador;
     }
 
+    /**
+     * Eliminar jugadores de la tabla jugadores
+     * @return confirmación de que han sido eliminados
+     */
     @DELETE
     @Path("/eliminar")
     public String eliminarJugadores(){
@@ -75,6 +85,11 @@ public class Jugadores {
         return str;
     }
     
+    /**
+     * Actualizar puntos del jugador
+     * @param nombre nombre del jugador
+     * @return confirmación de que ha sido actualizado
+     */
     @PUT
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -89,4 +104,5 @@ public class Jugadores {
         }
         return str;
     }
+
 }

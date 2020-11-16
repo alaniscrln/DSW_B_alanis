@@ -2,10 +2,6 @@ package es.iespuertodelacruz.alanissimoes;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-/**
- *
- * @author Alanis
- */
 @JsonRootName(value = "palabra")
 public class Palabra {
     private String palabra;
@@ -16,7 +12,7 @@ public class Palabra {
 
     public Palabra(String palabra, int haSidoUsada) {
         this.palabra = palabra;        
-        this.haSidoUsada = haSidoUsada;  // 0 = false, 1 = true
+        this.haSidoUsada = haSidoUsada; 
     }
     
     //-----------------------------------------------------------------------------

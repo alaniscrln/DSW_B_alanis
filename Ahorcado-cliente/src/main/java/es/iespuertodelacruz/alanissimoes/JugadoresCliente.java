@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package es.iespuertodelacruz.alanissimoes;
 
 import javax.ws.rs.client.Client;
@@ -12,10 +7,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import org.glassfish.jersey.jackson.JacksonFeature;
 
-/**
- *
- * @author Alanis
- */
 public class JugadoresCliente {
 
     public static String getInfoServicio() {
@@ -58,7 +49,6 @@ public class JugadoresCliente {
                 .register(JacksonFeature.class)
                 .build();
         WebTarget target = client.target("http://localhost:8080/ahorcado");
-        //.path("/palabra/update");
         target = target.queryParam("nombre", nombre);
 
         Jugador jugador = target.path("/jugador/get")

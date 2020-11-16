@@ -54,7 +54,6 @@ public class PalabrasCliente {
                 .queryParam("p", palabra)
                 .request().get(Palabra.class);
 
-        //p.setHaSidoUsada(1);
         target = client.target("http://localhost:8080/ahorcado").path("/palabra/update").queryParam("p", palabra);
         Response response = target.request().put(Entity.json(p));
         return response;

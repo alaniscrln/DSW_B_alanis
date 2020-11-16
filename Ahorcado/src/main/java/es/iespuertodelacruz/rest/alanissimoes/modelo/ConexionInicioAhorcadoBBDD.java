@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-/**
- *
- * @author Alanis
- */
 public class ConexionInicioAhorcadoBBDD {
 
     static Connection conn = null;
@@ -40,18 +36,18 @@ public class ConexionInicioAhorcadoBBDD {
      * Metodo que finaliza la conexion con la BBDD
      */
     public static void closeConnectSQLite() {
-
         try {
             if (conn != null) {
                 conn.close();
             }
         } catch (Exception exception) {
             System.out.println("Se ha producido un error cerrando la conexion con la BBDD palabras:" + exception.getMessage());
-
         }
-
     }
 
+    /**
+     * Metodo que cre la tabla palabras
+     */
     public static void crearTablaPalabra() {
 
         String sql = "CREATE TABLE IF NOT EXISTS palabras (\n"
@@ -72,6 +68,9 @@ public class ConexionInicioAhorcadoBBDD {
         }
     }
 
+    /**
+     * Metodo que crea la tabla jugador
+     */
     public static void crearTablaJugador() {
 
         String sql = "CREATE TABLE IF NOT EXISTS jugador (\n"
@@ -85,7 +84,7 @@ public class ConexionInicioAhorcadoBBDD {
             stmt.execute(sql);
             System.out.println("Tabla jugador creada.");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Fallo en crear tabla jugador: " + e.getMessage());
         } finally {
             closeConnectSQLite();
         }
