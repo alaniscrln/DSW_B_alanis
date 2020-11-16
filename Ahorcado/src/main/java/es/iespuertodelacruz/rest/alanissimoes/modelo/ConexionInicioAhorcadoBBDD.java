@@ -75,8 +75,7 @@ public class ConexionInicioAhorcadoBBDD {
     public static void crearTablaJugador() {
 
         String sql = "CREATE TABLE IF NOT EXISTS jugador (\n"
-                + "id INTEGER NOT NULL PRIMARY KEY, \n"
-                + "nombre VARCHAR(10),\n"
+                + "nombre VARCHAR(100) PRIMARY KEY,\n"
                 + "puntos INTEGER"
                 + ");";
 

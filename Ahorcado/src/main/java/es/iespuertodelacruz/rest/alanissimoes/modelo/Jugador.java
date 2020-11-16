@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Jugador {
-    private int id;
     private String nombre;
     private int puntos;
     
@@ -17,33 +16,22 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(int id, String nombre) {
-        this.id = id;
+    public Jugador(String nombre) {
         this.nombre = nombre;
         this.puntos = 0;
-        almacenarBBDD();
     }
 
     //-----------------------------------------------------------------------------
 
-    public int getId() {
-        return id;
+    public String getNombre(){
+        return this.nombre;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     public int getPuntos() {
-        return puntos;
+        return this.puntos;
     }
 
     public void setPuntos(int puntos) {
@@ -54,15 +42,7 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador{" + "\nid = " + id + "\nnombre = " + nombre + "\npuntos = " + puntos + "\n}";
+        return "Jugador{" + "\nnombre = " + nombre + "\npuntos = " + puntos + "\n}";
     }
-    
-    /**
-     * Almacenar en la bbdd palabra el objeto palabra
-     */
-    public void almacenarBBDD(){
-        ConexionInicioAhorcadoBBDD.crearTablaJugador();
-        JugadorBBDD.insert(getId(),getNombre());
-    }    
-    
+
 }

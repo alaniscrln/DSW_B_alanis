@@ -2,8 +2,12 @@ package es.iespuertodelacruz.rest.alanissimoes.servicios;
 
 import es.iespuertodelacruz.rest.alanissimoes.modelo.Palabra;
 import es.iespuertodelacruz.rest.alanissimoes.modelo.PalabraBBDD;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -28,7 +32,21 @@ public class Palabras {
         String output = "Servicio Palabras OK ";
         return Response.status(200).entity(output).build();
     }
-    
+
+    @GET
+    @Path("/get")
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Palabra getPalabraByPalabra(@QueryParam("p") String palabra){
+        Palabra p = null;
+        try {
+            p = PalabraBBDD.selectPalabra(palabra);
+        } catch (Exception ex) {
+            System.out.println("No se ha encontrado la palabra: " + ex.getMessage());
+        }finally{
+            return p;
+        }
+    }
     /**
      * Crear una palabra, guardarla en la bbdd y usarla
      *
@@ -41,7 +59,7 @@ public class Palabras {
         Palabra palabra = new Palabra();
         try {
             palabra.setPalabra(p);
-            palabra.setHaSidoUsada(1); // 1 porque la usaremos
+            palabra.setHaSidoUsada(0); // 1 porque la usaremos
             PalabraBBDD.insert(p, palabra.HaSidoUsada());
         } catch (Exception e) {
             palabra = null;
@@ -49,22 +67,6 @@ public class Palabras {
         }
         return palabra.getPalabra();
     }
-//    @POST
-//    @Path("/insert")
-//    public String usarPalabra(@QueryParam("p") String p) {
-//        Palabra palabra = new Palabra();
-//        try {
-//            ConexionInicioPalabraBBDD.crearTabla();
-//            System.out.println(p);
-//            palabra.setPalabra(p);
-//            palabra.setHaSidoUsada(1); // 1 porque la usaremos
-//            PalabraBBDD.insert(p, palabra.HaSidoUsada());
-//        } catch (Exception e) {
-//            palabra = null;
-//            System.out.println("Error al crear la palabra : " + e.getMessage());
-//        }
-//        return palabra.toString();
-//    }
 
     /**
      * Usar una palabra random de la bbdd
@@ -73,11 +75,37 @@ public class Palabras {
      */
     @GET
     @Path("/random")
-    @Produces({MediaType.APPLICATION_XML})
+    //@Produces({MediaType.APPLICATION_XML})
     public String usarPalabraRandom() {
-        Palabra palabra = PalabraBBDD.selectRandom();
-        palabra.setHaSidoUsada(1);
+        Palabra palabra = new Palabra();
+        try {
+            palabra = PalabraBBDD.selectRandom();
+            palabra.setHaSidoUsada(1);
+        } catch (Exception ex) {
+            palabra = null;
+            System.out.println("Error en seleccionar palabra random: " + ex.getMessage());
+        }
         return palabra.getPalabra();
     }
 
+    /**
+     * Actualizar valor palabra haSidoUsada
+     * @param p palabra a actualizar
+     * @return 
+     */
+    @PUT
+    @Path("/update")
+    @Consumes(MediaType.APPLICATION_XML)
+    public String actualizarHaSidoUsada(@QueryParam("p") String p, Palabra updatePalabra) {
+        String str = "";
+        try {
+            PalabraBBDD.updateHaSidoUsada(p);
+            str = "Palabra actualizada";
+        } catch (Exception ex) {
+            str = "Palabra no actualizada";
+            System.out.println("Error en actualizar palabra haSidoUsada: " + ex.getMessage());
+        } finally {
+            return str;
+        }
+    }
 }

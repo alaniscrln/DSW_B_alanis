@@ -5,6 +5,7 @@ import es.iespuertodelacruz.rest.alanissimoes.modelo.JugadorBBDD;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
@@ -29,26 +30,43 @@ public class Jugadores {
     }
 
     @POST
-    @Path("/crear-jugador")
-    public void crearJugador(@QueryParam("id")int id, @QueryParam("nombre") String nombre) {
+    @Path("/crear")
+    public Jugador crearJugador(@QueryParam("nombre") String nombre) {
+        Jugador jugador = new Jugador();
         try {
-            Jugador jugador = new Jugador(id, nombre);
+            jugador.setNombre(nombre);
+            jugador.setPuntos(0);
+            JugadorBBDD.insert(nombre);
         } catch (Exception e) {
+            jugador = null;
             System.out.println("Error al crear al jugador " + nombre + ": " + e.getMessage() );
         }
+        return jugador;
     }
 
     @DELETE
-    @Path("/eliminar-jugador")
-    public void eliminarJugador(@QueryParam("id") int id){
-        JugadorBBDD.delete(id);
+    @Path("/eliminar")
+    public String eliminarJugador(@QueryParam("nombre") String nombre){
+        String str;
+        try {
+        JugadorBBDD.delete(nombre);
+            str = "Jugador eliminado";
+        }catch (Exception ex) {
+            str = "Jugador no eliminado: " + ex.getMessage();
+        }
+        return str;
     }
     
-    
-    
-    /*
-    metodos a crear:
-    crear jugador
-    eliminar jugador
-     */
+    @PUT
+    @Path("/update")
+    public String updatePuntos(@QueryParam("nombre") String nombre){
+        String str;
+        try {
+            JugadorBBDD.updatePuntos(nombre);
+            str = "Jugador actualizado";
+        }catch (Exception ex) {
+            str = "Jugador no actualizado";
+        }
+        return str;
+    }
 }

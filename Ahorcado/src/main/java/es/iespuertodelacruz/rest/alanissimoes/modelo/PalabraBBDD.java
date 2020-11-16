@@ -10,13 +10,14 @@ import java.sql.SQLException;
  * @author Alanis
  */
 public class PalabraBBDD {
-    
+
     /**
-     * Insertar palabra en la bbdd palabra
+     * Insertar palabra en la bbdd palabras
+     *
      * @param palabra palabra a insertar
      * @param haSidoUsada saber si ha sido usada antes
      */
-    public static void insert(String palabra, int haSidoUsada){
+    public static void insert(String palabra, int haSidoUsada) throws Exception {
         String sql = "INSERT INTO palabras (palabra, haSidoUsada) VALUES(?,?)";
 
         try {
@@ -31,15 +32,16 @@ public class PalabraBBDD {
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
         }
     }
-    
+
     /**
-     * Seleccionar una palabra aleatoria de la bbdd palabra
+     * Seleccionar una palabra aleatoria de la bbdd palabras
+     *
      * @return palabra seleccionada
      */
-    public static Palabra selectRandom(){
+    public static Palabra selectRandom() throws Exception {
         String sql = "SELECT * FROM palabras ORDER BY RANDOM() LIMIT 1";
         Palabra palabra = new Palabra();
-        
+
         try {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -47,7 +49,7 @@ public class PalabraBBDD {
 
             palabra.setPalabra(resultSet.getString("palabra"));
             palabra.setHaSidoUsada(resultSet.getInt("haSidoUsada"));
-           
+
         } catch (Exception e) {
             palabra = null;
             System.out.println("Error en selectRandom: " + e.getMessage());
@@ -56,5 +58,48 @@ public class PalabraBBDD {
             return palabra;
         }
     }
-    
+
+    /**
+     * Actualizar 'haSidoUsada' en la bbdd palabras
+     *
+     * @param palabra
+     */
+    public static void updateHaSidoUsada(String palabra) throws Exception {
+
+        String sql = "UPDATE palabras SET haSidoUsada = ? WHERE palabra = ?";
+        try {
+            Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, 1);
+            pstmt.setString(2, palabra);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("no se actualiza la palabra: " + e.getMessage());
+        } finally {
+            ConexionInicioAhorcadoBBDD.closeConnectSQLite();
+        }
+    }
+
+    public static Palabra selectPalabra(String palabra) throws Exception {
+        String sql = "SELECT * FROM palabras WHERE palabra = ?";
+
+        Palabra p = new Palabra();
+        try {
+            Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, palabra);
+            ResultSet resultSet = pstmt.executeQuery();
+
+            p.setPalabra(resultSet.getString("palabra"));
+            p.setHaSidoUsada(resultSet.getInt("haSidoUsada"));
+
+        } catch (Exception e) {
+            p = null;
+            System.out.println("Error en selectPalabra: " + e.getMessage());
+        } finally {
+            ConexionInicioAhorcadoBBDD.closeConnectSQLite();
+            return p;
+        }
+    }
+
 }

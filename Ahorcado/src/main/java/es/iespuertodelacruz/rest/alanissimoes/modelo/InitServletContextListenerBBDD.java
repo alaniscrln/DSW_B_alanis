@@ -25,7 +25,7 @@ public class InitServletContextListenerBBDD implements ServletContextListener {
      */
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-        System.out.println("Creando bbdd y sus tablas jugdor y palabra");
+        System.out.println("Creando bbdd y sus tablas jugador y palabra");
         ConexionInicioAhorcadoBBDD.openConnectSQLite();
         ConexionInicioAhorcadoBBDD.crearTablaPalabra();
         ConexionInicioAhorcadoBBDD.crearTablaJugador();

@@ -19,18 +19,16 @@ public class JugadorBBDD {
     /**
      * Insertar jugador en la bbdd jugador
      *
-     * @param id número identificador del jugador en la bbdd
      * @param nombre nombre del jugador
      */
-    public static void insert(int id, String nombre) {
-        String sql = "INSERT INTO jugador (id, nombre, puntos) VALUES(?,?,?)";
+    public static void insert(String nombre) throws Exception{
+        String sql = "INSERT INTO jugador (nombre, puntos) VALUES(?,?)";
 
         try {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            pstmt.setString(2, nombre);
-            pstmt.setInt(3, 0);
+            pstmt.setString(1, nombre);
+            pstmt.setInt(2, 0);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Se ha producido un error almacenando en la BBDD jugador:" + e.getMessage());
@@ -42,14 +40,15 @@ public class JugadorBBDD {
     /**
      * Eliminar jugador de la bbdd jugador
      *
-     * @param id id del jugador a eliminar
+     * @param nombre nombre del jugador
+     * @throws java.lang.Exception
      */
-    public static void delete(int id) {
-        String sql = "DELETE FROM jugador WHERE id = ?";
+    public static void delete(String nombre) throws Exception{
+        String sql = "DELETE FROM jugador WHERE nombre = ?";
         try {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setString(1, nombre);
             pstmt.executeUpdate();
             System.out.println("jugador eliminado");
         } catch (Exception e) {
@@ -62,18 +61,19 @@ public class JugadorBBDD {
     /**
      * Actualizar los puntos del jugador en la bbdd jugador
      *
-     * @param id id del jugador a actualizar los datos
+     * @param nombre nombre del jugador
+     * @throws java.lang.Exception
      */
-    public static void updatePuntos(int id) {
-        String sql = "UPDATE jugador SET puntos = ? WHERE id = ?";
+    public static void updatePuntos(String nombre) throws Exception{
+        String sql = "UPDATE jugador SET puntos = ? WHERE nombre = ?";
         try {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            int puntos = selectPuntos(id) + 1;
+            int puntos = selectPuntos(nombre) + 1;
             pstmt.setInt(1, puntos);
-            pstmt.setInt(2, id);
+            pstmt.setString(2, nombre);
             pstmt.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("no se actualiza el jugador: " + e.getMessage());
         } finally {
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
@@ -85,17 +85,17 @@ public class JugadorBBDD {
      * @param id id del jugador
      * @return puntos actuales del jugador
      */
-    private static int selectPuntos(int id) {
-        String sql = "SELECT puntos FROM jugador WHERE id = ?";
+    private static int selectPuntos(String nombre) throws Exception{
+        String sql = "SELECT puntos FROM jugador WHERE nombre = ?";
         int puntos = 0;
 
         try {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setString(1, nombre);
             ResultSet resultSet = pstmt.executeQuery();
             puntos = resultSet.getInt("puntos");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("error al obtener puntos del jugador: " + e.getMessage());
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
 
