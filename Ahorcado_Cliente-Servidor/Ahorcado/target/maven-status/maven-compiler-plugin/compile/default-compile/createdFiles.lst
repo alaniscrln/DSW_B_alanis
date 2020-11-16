@@ -1,0 +1,9 @@
+es\iespuertodelacruz\rest\alanissimoes\servicios\Jugadores.class
+es\iespuertodelacruz\rest\alanissimoes\modelo\InitServletContextListenerBBDD.class
+es\iespuertodelacruz\rest\alanissimoes\modelo\PalabraBBDD.class
+es\iespuertodelacruz\rest\alanissimoes\servicios\Palabras.class
+es\iespuertodelacruz\rest\alanissimoes\modelo\JugadorBBDD.class
+es\iespuertodelacruz\rest\alanissimoes\modelo\Palabra.class
+es\iespuertodelacruz\rest\alanissimoes\modelo\Jugador.class
+es\iespuertodelacruz\rest\alanissimoes\exception\NoExisteAlumnoException.class
+es\iespuertodelacruz\rest\alanissimoes\modelo\ConexionInicioAhorcadoBBDD.class
