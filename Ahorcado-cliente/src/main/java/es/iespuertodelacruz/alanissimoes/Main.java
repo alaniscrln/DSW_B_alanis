@@ -11,44 +11,108 @@ public class Main {
         String jugador2 = "";
         int op, opNumJugador;
         boolean salirJuego = false;
-
+        boolean jugarOtraVez = false;
         System.out.println("AHORCADO");
 
-        System.out.println("\nElige el número de jugadores: "
-                + "\n1.- Un jugador"
-                + "\n2.- Dos jugadores"
+        do {
+            System.out.println("\nElige el número de jugadores: "
+                    + "\n1.- Un jugador"
+                    + "\n2.- Dos jugadores"
+                    + "\n0.- Salir"
+                    + "\nIntroduzca una opción: ");
+            opNumJugador = cin.nextInt();
+            cin.nextLine();
+            switch (opNumJugador) {
+                case 1: {
+                    System.out.println("\nNombre del jugador: ");
+                    jugador1 = cin.nextLine();
+                    JugadoresCliente.crearJugador(jugador1);
+                    int rondas = numeroRondas(cin);
+                    for (int i = 0; i < rondas; i++) {
+                        System.out.println("\nRonda número " + (i + 1));
+                        juegoIndividual(cin, jugador1);
+                    }
+                    Jugador jugador1Obj = JugadoresCliente.getJugadorByNombre(jugador1);
+                    System.out.println("\n====================================================");
+                    System.out.println("\nRondas ganadas: " + jugador1Obj.getPuntos() + "/" + rondas);
+                    System.out.println("\n====================================================");
+
+                    jugarOtraVez = menuJugarOtraVez(cin);
+
+                    break;
+                }
+                case 2: {
+                    System.out.println("\nNombre del jugador 1: ");
+                    jugador1 = cin.nextLine();
+                    JugadoresCliente.crearJugador(jugador1);
+                    System.out.println("\nNombre del jugador 2: ");
+                    jugador2 = cin.nextLine();
+                    JugadoresCliente.crearJugador(jugador2);
+
+                    int rondas = numeroRondas(cin);
+                    for (int i = 0; i < rondas; i++) {
+                        System.out.println("\nRonda número " + (i + 1));
+                        juegoDual(cin, jugador1, jugador2, i + 1);
+                        cin.nextLine();
+                    }
+                    Jugador jugador1Obj = JugadoresCliente.getJugadorByNombre(jugador1);
+                    Jugador jugador2Obj = JugadoresCliente.getJugadorByNombre(jugador2);
+                    System.out.println("\n====================================================");
+                    System.out.println("\n" + jugador1 + ": ");
+                    System.out.println("\nRondas ganadas: " + jugador1Obj.getPuntos() + "/" + rondas);
+                    System.out.println("\n" + jugador2 + ": ");
+                    System.out.println("\nRondas ganadas: " + jugador2Obj.getPuntos() + "/" + rondas);
+                    if (jugador1Obj.getPuntos() == jugador2Obj.getPuntos()) {
+                        System.out.println("\n¡Vaya! Hubo empate...");
+                    } else {
+                        String jugadorGanador = (jugador1Obj.getPuntos() > jugador2Obj.getPuntos()) ? jugador1 : jugador2;
+                        System.out.println("\n¡Felicidades, " + jugadorGanador + ", eres el ganador!");
+                    }
+                    System.out.println("\n====================================================");
+
+                    jugarOtraVez = menuJugarOtraVez(cin);
+
+                    break;
+                }
+                case 0:
+                    salir();
+                    System.out.println("\n¡Gracias por jugar!");
+                    salirJuego = true;
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+
+        } while (jugarOtraVez && !salirJuego);
+
+    }
+
+    private static void salir() {
+        JugadoresCliente.delJugadores();
+        PalabrasCliente.resetPalabras();
+    }
+
+    private static boolean menuJugarOtraVez(Scanner cin) throws AssertionError {
+        boolean jugarOtraVez = false;
+        //menu de salir o jugar otra vez (si se juega otra vez hay q resetear todo)
+        System.out.println("\n1.- Jugar otra vez"
                 + "\n0.- Salir"
                 + "\nIntroduzca una opción: ");
-        opNumJugador = cin.nextInt();
-        cin.nextLine();
-        switch (opNumJugador) {
+        int opRepetir = cin.nextInt();
+        switch (opRepetir) {
             case 1:
-                System.out.println("\nNombre del jugador: ");
-                jugador1 = cin.nextLine();
-                JugadoresCliente.crearJugador(jugador1);
-                int rondas = numeroRondas(cin);
-                for (int i = 0; i < rondas; i++) {
-                    System.out.println("\nRonda número " + (i+1));
-                    juegoIndividual(cin, jugador1);
-                }
-                
-                break;
-            case 2:
-                System.out.println("\nNombre del jugador 1: ");
-                jugador1 = cin.nextLine();
-                JugadoresCliente.crearJugador(jugador1);
-                System.out.println("\nNombre del jugador 2: ");
-                jugador2 = cin.nextLine();
-                JugadoresCliente.crearJugador(jugador2);
-                juegoDual(cin, jugador1, jugador2);
+                PalabrasCliente.resetPalabras();
+                JugadoresCliente.delJugadores();
+                jugarOtraVez = true;
                 break;
             case 0:
-                salirJuego = true;
+                salir();
+                System.out.println("\n¡Gracias por jugar!");
                 break;
             default:
                 throw new AssertionError();
         }
-
+        return jugarOtraVez;
     }
 
     private static int numeroRondas(Scanner cin) {
@@ -72,38 +136,33 @@ public class Main {
         System.out.println("Palabra a jugar: " + palabraJugada);
         boolean haGanado = juego(palabraJugada, cin);
         if (haGanado) {
-            System.out.println(jugador);
             JugadoresCliente.updatePuntosJugador(jugador);
         }
     }
 
-    private static void juegoDual(Scanner cin, String jugador1, String jugador2) {
-
-        System.out.println("1.- Insertar palabra"
-                + "\n2.- Palabra aleatoria"
-                + "\nIntroduzca una opción: ");
-        int op = cin.nextInt();
-        cin.nextLine();
-        String palabraJugada = "";
-
-        switch (op) {
-            case 1:
-                System.out.println("Introduzca la palabra: ");
-                palabraJugada = cin.nextLine();
-                PalabrasCliente.insertarPalabra(palabraJugada);
-                System.out.println("La palabra introducida es: " + palabraJugada);
-                break;
-            case 2:
-                palabraJugada = PalabrasCliente.getPalabraRandom();
-                PalabrasCliente.updateHaSidoUsada(palabraJugada);   // marcarla como que ya ha sido usada
-                System.out.println("Palabra a jugar: " + palabraJugada);
-                break;
-            default:
-                throw new AssertionError();
+    private static void juegoDual(Scanner cin, String jugador1, String jugador2, int ronda) {
+        String palabraJugada;
+        String palabraJugador;
+        String turnoJugador;
+        if (ronda % 2 == 1) {
+            palabraJugador = jugador1;
+            turnoJugador = jugador2;
+        } else {
+            palabraJugador = jugador2;
+            turnoJugador = jugador1;
         }
 
-        juego(palabraJugada, cin);
+        System.out.println("\nA " + palabraJugador + " le toca introducir la palabra: ");
+        palabraJugada = cin.nextLine();
+        PalabrasCliente.insertarPalabra(palabraJugada);
+        PalabrasCliente.updateHaSidoUsada(palabraJugada);   // marcarla como que ya ha sido usada
+        System.out.println("La palabra introducida es: " + palabraJugada);
 
+        System.out.println("\n¡" + turnoJugador + ", a jugar!");
+        boolean haGanado = juego(palabraJugada, cin);
+        if (haGanado) {
+            JugadoresCliente.updatePuntosJugador(turnoJugador);
+        }
     }
 
     private static boolean juego(String palabraJugada, Scanner cin) {
@@ -136,12 +195,14 @@ public class Main {
                     }
                 }
             }
+            
         }
 
         if (haGanado(palabraGuiones)) {
             System.out.println("\n¡Felicidades! Has ganado :)");
         } else {
             System.out.println("\nLo siento... Has perdido :(");
+            System.out.println("\nLa palabra era '" + palabraJugada + "'");
         }
 
         return haGanado(palabraGuiones);

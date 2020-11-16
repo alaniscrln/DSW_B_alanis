@@ -39,7 +39,7 @@ public class PalabraBBDD {
      * @return palabra seleccionada
      */
     public static Palabra selectRandom() throws Exception {
-        String sql = "SELECT * FROM palabras ORDER BY RANDOM() LIMIT 1";
+        String sql = "SELECT * FROM palabras WHERE haSidoUsada = 0 ORDER BY RANDOM() LIMIT 1";
         Palabra palabra = new Palabra();
 
         try {
@@ -99,6 +99,20 @@ public class PalabraBBDD {
         } finally {
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
             return p;
+        }
+    }
+    
+    public static void updateResetPalabras(){
+        String sql = "UPDATE palabras SET haSidoUsada = 0 WHERE haSidoUsada = 1";
+        try {
+            Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+            System.out.println("Palabras reseteadas.");
+        } catch (Exception e) {
+            System.out.println("no se resetean las palabras: " + e.getMessage());
+        } finally {
+            ConexionInicioAhorcadoBBDD.closeConnectSQLite();
         }
     }
 

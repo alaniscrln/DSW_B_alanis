@@ -64,45 +64,24 @@ public class Jugadores {
 
     @DELETE
     @Path("/eliminar")
-    public String eliminarJugador(@QueryParam("nombre") String nombre){
+    public String eliminarJugadores(){
         String str;
         try {
-        JugadorBBDD.delete(nombre);
-            str = "Jugador eliminado";
+        JugadorBBDD.deleteJugadores();
+        str = "Jugadores eliminados";
         }catch (Exception ex) {
-            str = "Jugador no eliminado: " + ex.getMessage();
+            str = "Jugadores no eliminados: " + ex.getMessage();
         }
         return str;
     }
     
-    
-    /*
-    
     @PUT
     @Path("/update")
-    @Consumes(MediaType.APPLICATION_XML)
-    public String actualizarHaSidoUsada(@QueryParam("p") String p, Palabra updatePalabra) {
-        String str = "";
-        try {
-            PalabraBBDD.updateHaSidoUsada(p);
-            str = "Palabra actualizada";
-        } catch (Exception ex) {
-            str = "Palabra no actualizada";
-            System.out.println("Error en actualizar palabra haSidoUsada: " + ex.getMessage());
-        } finally {
-            return str;
-        }
-    }
-    */
-    @PUT
-    @Path("/update")
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes(MediaType.APPLICATION_JSON)
     public String updatePuntos(@QueryParam("nombre") String nombre){
         String str;
         try {
-            System.out.println("hola, paso por aqui ewe");
             JugadorBBDD.updatePuntos(nombre);
-            System.out.println("puntos actualizados owo");
             str = "Jugador actualizado";
         }catch (Exception ex) {
             str = "Jugador no actualizado";

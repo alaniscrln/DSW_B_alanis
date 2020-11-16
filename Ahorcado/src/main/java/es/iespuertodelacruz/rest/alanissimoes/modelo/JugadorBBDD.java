@@ -43,16 +43,15 @@ public class JugadorBBDD {
      * @param nombre nombre del jugador
      * @throws java.lang.Exception
      */
-    public static void delete(String nombre) throws Exception{
-        String sql = "DELETE FROM jugador WHERE nombre = ?";
+    public static void deleteJugadores() throws Exception{
+        String sql = "DELETE FROM jugador";
         try {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, nombre);
             pstmt.executeUpdate();
-            System.out.println("jugador eliminado");
+            System.out.println("jugadores eliminados");
         } catch (Exception e) {
-            System.out.println("no se elimina correctamente. " + e.getMessage());
+            System.out.println("no se eliminan los jugadores correctamente. " + e.getMessage());
         } finally {
             ConexionInicioAhorcadoBBDD.closeConnectSQLite();
         }
@@ -69,9 +68,7 @@ public class JugadorBBDD {
         try {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            System.out.println("puntos antes de actualizar: " + selectPuntos(nombre));
             int puntos = selectPuntos(nombre) + 1;
-            System.out.println("puntos despues de actualizar: " + puntos);
             pstmt.setInt(1, puntos);
             pstmt.setString(2, nombre);
             pstmt.executeUpdate();

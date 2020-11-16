@@ -43,7 +43,7 @@ public class PalabrasCliente {
         return response;
     }
 
-        public static Response updateHaSidoUsada(String palabra) {
+    public static Response updateHaSidoUsada(String palabra) {
         //PUT
         Client client = ClientBuilder.newBuilder()
                 .register(JacksonFeature.class)
@@ -53,13 +53,30 @@ public class PalabrasCliente {
         Palabra p = target.path("/palabra/get")
                 .queryParam("p", palabra)
                 .request().get(Palabra.class);
-        
-        p.setHaSidoUsada(1);
 
+        //p.setHaSidoUsada(1);
         target = client.target("http://localhost:8080/ahorcado").path("/palabra/update").queryParam("p", palabra);
         Response response = target.request().put(Entity.json(p));
         return response;
-        
+
+    }
+    
+    public static Response resetPalabras() {
+        //PUT
+        Client client = ClientBuilder.newBuilder()
+                .register(JacksonFeature.class)
+                .build();
+        WebTarget target = client.target("http://localhost:8080/ahorcado");
+
+        Palabra p = target.path("/palabra/get")
+                .queryParam("p", "electroencefalograma")
+                .request().get(Palabra.class);
+        // al ser put me pide obligatoriamente poner algo en el (put), no sé por que. por eso está el obj p
+         //pero realmente no se utiliza para nada
+        target = client.target("http://localhost:8080/ahorcado").path("/palabra/reset");
+        Response response = target.request().put(Entity.json(p));
+        return response;
+
     }
 
 }

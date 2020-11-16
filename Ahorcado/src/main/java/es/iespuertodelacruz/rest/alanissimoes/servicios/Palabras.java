@@ -95,7 +95,7 @@ public class Palabras {
      */
     @PUT
     @Path("/update")
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes(MediaType.APPLICATION_JSON)
     public String actualizarHaSidoUsada(@QueryParam("p") String p) {
         String str = "";
         try {
@@ -104,6 +104,22 @@ public class Palabras {
         } catch (Exception ex) {
             str = "Palabra no actualizada";
             System.out.println("Error en actualizar palabra haSidoUsada: " + ex.getMessage());
+        } finally {
+            return str;
+        }
+    }
+    
+    @PUT
+    @Path("/reset")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String resetPalabras() {
+        String str = "";
+        try {
+            PalabraBBDD.updateResetPalabras();
+            str = "Palabras reseteadas";
+        } catch (Exception ex) {
+            str = "Palabras no reseteadas";
+            System.out.println("Error en resetear palabras: " + ex.getMessage());
         } finally {
             return str;
         }
