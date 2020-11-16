@@ -9,6 +9,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 import org.glassfish.jersey.jackson.JacksonFeature;
 
 /**
@@ -40,15 +41,23 @@ public class JugadoresCliente {
         return response;
     }
     
-    public static String updatePuntos(String nombre){
+    public static Response updatePuntosJugador(String nombre){
         //PUT
         Client client = ClientBuilder.newBuilder()
                 .register(JacksonFeature.class)
                 .build();
-
-        WebTarget target = client.target("http://localhost:8080/ahorcado").path("/jugador/update");
+        WebTarget target = client.target("http://localhost:8080/ahorcado");
+        //.path("/palabra/update");
         target = target.queryParam("nombre", nombre);
-        String response = target.request().put(Entity.xml(target), String.class);
+        
+        Jugador jugador = target.path("/jugador/get")
+                .queryParam("nombre", nombre)
+                .request().get(Jugador.class);
+        
+        jugador.setPuntos(jugador.getPuntos()); //prueba
+        
+        target = client.target("http://localhost:8080/ahorcado").path("/jugador/update").queryParam("nombre", nombre);
+        Response response = target.request().put(Entity.json(jugador));
         return response;
     }
             

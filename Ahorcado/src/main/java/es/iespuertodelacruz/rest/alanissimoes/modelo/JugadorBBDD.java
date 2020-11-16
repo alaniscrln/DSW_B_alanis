@@ -69,7 +69,9 @@ public class JugadorBBDD {
         try {
             Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
             PreparedStatement pstmt = conn.prepareStatement(sql);
+            System.out.println("puntos antes de actualizar: " + selectPuntos(nombre));
             int puntos = selectPuntos(nombre) + 1;
+            System.out.println("puntos despues de actualizar: " + puntos);
             pstmt.setInt(1, puntos);
             pstmt.setString(2, nombre);
             pstmt.executeUpdate();
@@ -101,6 +103,28 @@ public class JugadorBBDD {
 
         }
         return puntos;
+    }
+    
+    public static Jugador selectJugador(String nombre) throws Exception {
+        String sql = "SELECT * FROM jugador WHERE nombre = ?";
+
+        Jugador jugador = new Jugador();
+        try {
+            Connection conn = ConexionInicioAhorcadoBBDD.openConnectSQLite();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, nombre);
+            ResultSet resultSet = pstmt.executeQuery();
+
+            jugador.setNombre(resultSet.getString("nombre"));
+            jugador.setPuntos(resultSet.getInt("puntos"));
+            
+        } catch (Exception e) {
+            jugador = null;
+            System.out.println("Error en selectPalabra: " + e.getMessage());
+        } finally {
+            ConexionInicioAhorcadoBBDD.closeConnectSQLite();
+            return jugador;
+        }
     }
 
 }

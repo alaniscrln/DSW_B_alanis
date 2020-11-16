@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.rest.alanissimoes.modelo;
+package es.iespuertodelacruz.alanissimoes;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 

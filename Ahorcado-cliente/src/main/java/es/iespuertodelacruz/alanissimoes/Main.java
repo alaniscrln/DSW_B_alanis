@@ -26,8 +26,8 @@ public class Main {
                 System.out.println("\nNombre del jugador: ");
                 jugador1 = cin.nextLine();
                 JugadoresCliente.crearJugador(jugador1);
-                
-                for (int i = 0; i < numeroRondas(cin); i++) {
+                int rondas = numeroRondas(cin);
+                for (int i = 0; i < rondas; i++) {
                     System.out.println("\nRonda número " + (i+1));
                     juegoIndividual(cin, jugador1);
                 }
@@ -67,11 +67,13 @@ public class Main {
 
     private static void juegoIndividual(Scanner cin, String jugador) {
         String palabraJugada = PalabrasCliente.getPalabraRandom();
+        System.out.println(palabraJugada);
         PalabrasCliente.updateHaSidoUsada(palabraJugada);   // marcarla como que ya ha sido usada
         System.out.println("Palabra a jugar: " + palabraJugada);
         boolean haGanado = juego(palabraJugada, cin);
         if (haGanado) {
-            JugadoresCliente.updatePuntos(jugador);
+            System.out.println(jugador);
+            JugadoresCliente.updatePuntosJugador(jugador);
         }
     }
 
@@ -125,10 +127,12 @@ public class Main {
                     posLetra = posLetra(letra, palabraJugada);
                     if (posLetra.isEmpty()) {
                         System.out.println("\nFallaste... :c");
+                        System.out.println(palabraGuiones);
                         error++;
                     } else {
                         palabraGuiones = pintarLetra(posLetra, letra, palabraGuiones);
                         System.out.println("\n¡Acertaste!");
+                        System.out.println(palabraGuiones);
                     }
                 }
             }

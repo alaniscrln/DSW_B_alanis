@@ -96,7 +96,7 @@ public class Palabras {
     @PUT
     @Path("/update")
     @Consumes(MediaType.APPLICATION_XML)
-    public String actualizarHaSidoUsada(@QueryParam("p") String p, Palabra updatePalabra) {
+    public String actualizarHaSidoUsada(@QueryParam("p") String p) {
         String str = "";
         try {
             PalabraBBDD.updateHaSidoUsada(p);
