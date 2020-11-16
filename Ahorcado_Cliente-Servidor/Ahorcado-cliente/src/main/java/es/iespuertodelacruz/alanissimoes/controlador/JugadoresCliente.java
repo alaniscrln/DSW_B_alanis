@@ -15,7 +15,8 @@ public class JugadoresCliente {
                 .register(JacksonFeature.class)
                 .build();
 
-        WebTarget target = client.target("http://localhost:8080/ahorcado/").path("jugador/info");
+        WebTarget target = client.target("http://localhost:8080/ahorcado/")
+                .path("jugador/info");
         String response = target.request().get().readEntity(String.class);
         return response;
     }
@@ -26,7 +27,8 @@ public class JugadoresCliente {
                 .register(JacksonFeature.class)
                 .build();
 
-        WebTarget target = client.target("http://localhost:8080/ahorcado/").path("jugador/get").queryParam("nombre", nombre);
+        WebTarget target = client.target("http://localhost:8080/ahorcado/")
+                .path("jugador/get").queryParam("nombre", nombre);
         Jugador jugador = target.request().get().readEntity(Jugador.class);
         return jugador;
     }
@@ -37,7 +39,8 @@ public class JugadoresCliente {
                 .register(JacksonFeature.class)
                 .build();
 
-        WebTarget target = client.target("http://localhost:8080/ahorcado").path("/jugador/crear");
+        WebTarget target = client.target("http://localhost:8080/ahorcado")
+                .path("/jugador/crear");
         target = target.queryParam("nombre", nombre);
         String response = target.request().post(null, String.class);
         return response;
@@ -57,7 +60,8 @@ public class JugadoresCliente {
 
         jugador.setPuntos(jugador.getPuntos()); //prueba
 
-        target = client.target("http://localhost:8080/ahorcado").path("/jugador/update").queryParam("nombre", nombre);
+        target = client.target("http://localhost:8080/ahorcado")
+                .path("/jugador/update").queryParam("nombre", nombre);
         Response response = target.request().put(Entity.json(jugador));
         return response;
     }
@@ -67,7 +71,8 @@ public class JugadoresCliente {
         Client client = ClientBuilder.newBuilder()
                 .register(JacksonFeature.class)
                 .build();
-        WebTarget target = client.target("http://localhost:8080/ahorcado").path("/jugador/eliminar");
+        WebTarget target = client.target("http://localhost:8080/ahorcado")
+                .path("/jugador/eliminar");
 
         target.request().delete();
     }

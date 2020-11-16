@@ -26,7 +26,8 @@ public class PalabrasCliente {
                 .register(JacksonFeature.class)
                 .build();
 
-        WebTarget target = client.target("http://localhost:8080/ahorcado/").path("palabra/random");
+        WebTarget target = client.target("http://localhost:8080/ahorcado/")
+                .path("palabra/random");
         String response = target.request().get().readEntity(String.class);
         return response;
     }
@@ -37,7 +38,8 @@ public class PalabrasCliente {
                 .register(JacksonFeature.class)
                 .build();
 
-        WebTarget target = client.target("http://localhost:8080/ahorcado").path("/palabra/insert");
+        WebTarget target = client.target("http://localhost:8080/ahorcado")
+                .path("/palabra/insert");
         target = target.queryParam("p", palabra);
         String response = target.request().post(null, String.class);
         return response;
@@ -54,7 +56,8 @@ public class PalabrasCliente {
                 .queryParam("p", palabra)
                 .request().get(Palabra.class);
 
-        target = client.target("http://localhost:8080/ahorcado").path("/palabra/update").queryParam("p", palabra);
+        target = client.target("http://localhost:8080/ahorcado")
+                .path("/palabra/update").queryParam("p", palabra);
         Response response = target.request().put(Entity.json(p));
         return response;
 
@@ -72,7 +75,8 @@ public class PalabrasCliente {
                 .request().get(Palabra.class);
         // al ser put me pide obligatoriamente poner algo en el (put), no sé por que. por eso está el obj p
          //pero realmente no se utiliza para nada
-        target = client.target("http://localhost:8080/ahorcado").path("/palabra/reset");
+        target = client.target("http://localhost:8080/ahorcado")
+                .path("/palabra/reset");
         Response response = target.request().put(Entity.json(p));
         return response;
 
