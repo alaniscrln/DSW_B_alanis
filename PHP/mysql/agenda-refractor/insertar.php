@@ -10,7 +10,7 @@
         <h1>Insertar datos BD (Agenda)</h1><br>
         <p>DNI: <input type="text" name="dni" /></p>
         <p>Nombre: <input type="text" name="nombre" /></p>
-        <p>Apellido: <input type="text" name="apellido" /></p>
+        <p>Apellidos: <input type="text" name="apellido" /></p>
         <p><input type="submit" /></p>
     </form>
 
@@ -26,7 +26,7 @@
             $nombre =  $_POST['nombre'];
             $apellido =  $_POST['apellido'];
             
-            $sql = "INSERT INTO direcciones (dni, nombre, apellido) VALUES ('$dni', '$nombre', '$apellido')";
+            $sql = "INSERT INTO direcciones (dni, nombre, apellidos) VALUES ('$dni', '$nombre', '$apellido')";
 
             if(mysqli_query($conn, $sql)){
                 echo "Datos insertados correctamente.<br>";
