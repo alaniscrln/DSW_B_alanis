@@ -10,11 +10,12 @@
 
     if(isset($_SESSION['lang'])){
         $lang = $_SESSION["lang"];
-        require "lang/".$lang.".php";
+        require "./../../lang/".$lang.".php";
     }else{
-        require "lang/es.php";
+        require "./../../lang/es.php";
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,12 +37,32 @@
         </form>
     </nav>
     
-	<div class="container">
-        
-    
+    <?php
+        if (isset($_REQUEST['dni']) && isset($_REQUEST['nombre']) && isset($_REQUEST['apellido'])) {
+
+            //comprobar tipo de dato
 
 
 
+            require './../crear_conexion.php';
+            $dni =  $_POST['dni'];
+            $nombre =  $_POST['nombre'];
+            $apellido =  $_POST['apellido'];
+            
+            $sql = "INSERT INTO direcciones (dni, nombre, apellidos) VALUES ('$dni', '$nombre', '$apellido')";
+
+            if(mysqli_query($conn, $sql)){
+                echo "<h1><center><br><br>Datos insertados correctamente<br></center></h1>";
+            } else{
+                echo "ERROR: No se pudo ejecutar la sentencia '$sql'. " . mysqli_error($conn) . "<br>";
+            }
+            include './../cerrar_conexion.php';
+        }
+    ?>
+
+	<div class="container text-center">
+        <br><br>
+        <button class="btn btn-primary btn-lg" onclick="location.href='./../../index.php'">Inicio</button>
 
 
 	</div>
@@ -50,3 +71,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
 </html>
+

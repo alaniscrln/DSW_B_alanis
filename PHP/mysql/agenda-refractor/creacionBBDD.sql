@@ -1,4 +1,4 @@
-drop database agenda;
+drop database if exists agenda;
 create database agenda;
 use agenda;
 

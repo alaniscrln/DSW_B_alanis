@@ -7,7 +7,11 @@
         "cambiar" => "Cambiar",
         "opcion_1" => "Español",
         "opcion_2" => "Inglés",
-
+        "btn_insertar" => "Insertar Dato",
+        "btn_eliminar" => "Eliminar Dato",
+        "btn_actualizar" => "Actualizar Dato",
+        "btn_buscar" => "Buscar Dato",
+        "btn_mostrar" => "Mostrar todos"
 
 
     );
