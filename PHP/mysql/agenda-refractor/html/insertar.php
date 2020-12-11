@@ -26,7 +26,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-light bg-light justify-content-between">
-        <a class="navbar-brand" href="./index.php"><?php echo $lang["logo"]; ?></a>
+        <a class="navbar-brand" href="./../index.php"><?php echo $lang["logo"]; ?></a>
         <form class="form-inline" method="POST">
             <label class="mr-sm-2" for="inlineFormCustomSelectPref"><?php echo $lang["cambiar_idioma"]; ?></label>
             <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="lang">
@@ -37,14 +37,14 @@
         </form>
     </nav>
     
-	<div class="container">
+	<div class="container text-center">
         
         <form action="./../php/CRUD/insertar.php" method="POST">
-            <h1>Insertar datos BD (Agenda)</h1><br>
-            <p>DNI: <input type="text" name="dni" /></p>
-            <p>Nombre: <input type="text" name="nombre" /></p>
-            <p>Apellidos: <input type="text" name="apellido" /></p>
-            <input type="submit" value="Insertar dato"/>
+            <br><h1><?php echo $lang["html_insertar"]; ?></h1><br>
+            <p><?php echo $lang["dni"]; ?>: <input type="text" name="dni" /></p>
+            <p><?php echo $lang["nombre"]; ?>: <input type="text" name="nombre" /></p>
+            <p><?php echo $lang["apellidos"]; ?>: <input type="text" name="apellido" /></p>
+            <input type="submit" value="<?php echo $lang["btn_insertar"]; ?>"/>
         </form>
 
 	</div>

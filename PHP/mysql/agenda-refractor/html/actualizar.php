@@ -10,9 +10,9 @@
 
     if(isset($_SESSION['lang'])){
         $lang = $_SESSION["lang"];
-        require "./../../lang/".$lang.".php";
+        require "./../lang/".$lang.".php";
     }else{
-        require "./../../lang/es.php";
+        require "./../lang/es.php";
     }
 ?>
 
@@ -26,7 +26,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-light bg-light justify-content-between">
-        <a class="navbar-brand" href="./../../index.php"><?php echo $lang["logo"]; ?></a>
+        <a class="navbar-brand" href="./../index.php"><?php echo $lang["logo"]; ?></a>
         <form class="form-inline" method="POST">
             <label class="mr-sm-2" for="inlineFormCustomSelectPref"><?php echo $lang["cambiar_idioma"]; ?></label>
             <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="lang">
@@ -37,40 +37,16 @@
         </form>
     </nav>
     
-	<div class="container">
+	<div class="container text-center">
         
-        <?php
-            require './../crear_conexion.php';
-
-            $sql = "SELECT * FROM direcciones" ;            
-            $resultado = mysqli_query($conn, $sql); 
-
-            echo '<br><br><center><table border="1" cellspacing="4" cellpadding="4"> 
-            <tr> 
-                <td>DNI</td> 
-                <td>Nombre</td> 
-                <td>Apellidos</td> 
-            </tr>';
-        
-            if($resultado->num_rows > 0){ 
-                while ($row = mysqli_fetch_array($resultado)) {
-                    $dni = $row["dni"];
-                    $nombre = $row["Nombre"];
-                    $apellidos = $row["Apellidos"];
-
-                    echo '<tr> 
-                            <td>'.$dni.'</td> 
-                            <td>'.$nombre.'</td> 
-                            <td>'.$apellidos.'</td> 
-                        </tr>';
-                }
-                echo '</table></center>';
-            } else{
-                echo $lang["mal_todos"] . "<br>";
-            }
-
-            include './../cerrar_conexion.php';    
-        ?>
+        <form action="./../php/CRUD/actualizar.php" method="POST">
+            <br>
+            <h1><?php echo $lang["html_actualizar"]; ?></h1><br>
+            <p><?php echo $lang["dni"]; ?>: <input type="text" name="dni" /></p>
+        <p><?php echo $lang["nombre_nuevo"]; ?>: <input type="text" name="nombre"></p>
+        <p><?php echo $lang["apellidos_nuevos"]; ?>: <input type="text" name="apellido"></p>
+        <input type="submit" value="<?php echo $lang["btn_actualizar"]; ?>"/>
+        </form>
 
 	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

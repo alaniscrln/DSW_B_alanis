@@ -37,19 +37,15 @@
     </nav>
     
 	<div class="container text-center">
-        <br><br>
-        <button class="btn btn-primary btn-lg" onclick="location.href='./html/insertar.php'"><?php echo $lang["btn_insertar"]; ?></button>
-        <br><br>
-        <button class="btn btn-primary btn-lg" onclick="location.href='./html/eliminar.php'"><?php echo $lang["btn_eliminar"]; ?></button>
-        <br><br>
-        <button class="btn btn-primary btn-lg" onclick="location.href='./html/actualizar.php'"><?php echo $lang["btn_actualizar"]; ?></button>
-        <br><br>
-        <button class="btn btn-primary btn-lg" onclick="location.href='./html/buscar.php'"><?php echo $lang["btn_buscar"]; ?></button>
-        <br><br>
-        <button class="btn btn-primary btn-lg" onclick="location.href='./html/seleccionar_todos.html'"><?php echo $lang["btn_mostrar"]; ?></button>
+        <br><br><br><br>
 
-
-
+        <div class="btn-group" role="group">
+            <button class="btn btn-primary btn-lg" onclick="location.href='./html/insertar.php'"><?php echo $lang["btn_insertar"]; ?></button>
+            <button class="btn btn-primary btn-lg" onclick="location.href='./html/eliminar.php'"><?php echo $lang["btn_eliminar"]; ?></button>
+            <button class="btn btn-primary btn-lg" onclick="location.href='./html/actualizar.php'"><?php echo $lang["btn_actualizar"]; ?></button>
+            <button class="btn btn-primary btn-lg" onclick="location.href='./html/buscar.php'"><?php echo $lang["btn_buscar"]; ?></button>
+            <button class="btn btn-primary btn-lg" onclick="location.href='./php/CRUD/seleccionar_todos.php'"><?php echo $lang["btn_mostrar"]; ?></button>
+        </div>
 
 	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

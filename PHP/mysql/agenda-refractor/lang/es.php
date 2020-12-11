@@ -1,6 +1,5 @@
 <?php
     $lang = array(
-        //nav
         "titulo" => "Manipulación BD (Agenda)",
         "logo" => "Manipulación BD (Agenda)",
         "cambiar_idioma" => "Lenguaje",
@@ -11,8 +10,24 @@
         "btn_eliminar" => "Eliminar Dato",
         "btn_actualizar" => "Actualizar Dato",
         "btn_buscar" => "Buscar Dato",
-        "btn_mostrar" => "Mostrar todos"
-
-
+        "btn_mostrar" => "Mostrar todos",
+        "html_insertar" => "Insertar datos BD (Agenda)",
+        "dni" => "DNI",
+        "nombre" => "Nombre",
+        "apellidos" => "Apellidos",
+        "html_eliminar" => "Eliminar datos BD (Agenda)",
+        "html_buscar" => "Buscar datos BD (Agenda)",
+        "html_actualizar" => "Actualizar datos BD (Agenda)",
+        "nombre_nuevo" => "Nombre nuevo",
+        "apellidos_nuevos" => "Apellidos nuevos",
+        "bien_actualizado" => "Datos actualizados correctamente",
+        "mal_actualizado" => "ERROR: No se pudo actualizar el dato",
+        "bien_buscar" => "Datos solicitados",
+        "mal_buscar" => "No existen los datos solicitados",
+        "bien_eliminado" => "Dato eliminado correctamente",
+        "mal_eliminado" => "ERROR: No se pudo eliminar dato",
+        "bien_insertado" => "Datos insertados correctamente",
+        "mal_insertado" => "ERROR: No se pudo insertar el dato",
+        "mal_todos" => "Aún no hay datos en Agenda"
     );
 ?>

@@ -1,6 +1,5 @@
 <?php
     $lang = array(
-        //nav
         "titulo" => "Manipulate DB(Agenda)",
         "logo" => "Manipulate DB(Agenda)",
         "cambiar_idioma" => "Language",
@@ -11,8 +10,24 @@
         "btn_eliminar" => "Delete Data",
         "btn_actualizar" => "Update Data",
         "btn_buscar" => "Search Data",
-        "btn_mostrar" => "Show All"
-
-
+        "btn_mostrar" => "Show All",
+        "html_insertar" => "Insert data DB (Agenda)",
+        "dni" => "DNI",
+        "nombre" => "Name",
+        "apellidos" => "Last name",
+        "html_eliminar" => "Delete data DB (Agenda)",
+        "html_buscar" => "Search data DB (Agenda)",
+        "html_actualizar" => "Update data DB (Agenda)",
+        "nombre_nuevo" => "New name",
+        "apellidos_nuevos" => "New last name",
+        "bien_actualizado" => "Data updated successfully",
+        "mal_actualizado" => "ERROR: Couldn't update data",
+        "bien_buscar" => "Requested data",
+        "mal_buscar" => "Requested data doesn't exist",
+        "bien_eliminado" => "Data deleted successfully",
+        "mal_eliminado" => "ERROR: Couldn't delete data",
+        "bien_insertado" => "Data inserted successfully",
+        "mal_insertado" => "ERROR: Couldn't insert data",
+        "mal_todos" => "There is no data in Agenda"
     );
 ?>
