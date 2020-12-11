@@ -18,7 +18,7 @@ public class HolaMundoCliente {
 //        String response = target.request().get().readEntity(String.class);
 //        System.out.println("Respuesta :" + response);
 
-        Entity<> entity = ...;
+       // Entity<> entity = ...;
         
         String result = client.target("http://localhost:8080/rest/")
                 .path("/sumar").request().post(entity ,String.class);
