@@ -28,6 +28,7 @@ public class UsuarioDao extends Conexion {
     /**
      * Metoro que realiza la insercion dentro de la BBDD
      * @param usuario
+     * @throws es.iespuertodelacruz.jpexposito.exception.UsuarioExisteException
 
      */
     public void insertar(Usuario usuario) throws UsuarioExisteException {
@@ -47,13 +48,18 @@ public class UsuarioDao extends Conexion {
         }  
     }
     
-    public void modificar() {
+    public void modificar(String dni, String nombreNuevo, String apellidosNuevo) {
         try {
-            
+            PreparedStatement pstmt = null;
+            pstmt = openConnectSQLite().prepareStatement(sqlModificar);
+            pstmt.setString(1,nombreNuevo);
+            pstmt.setString(2, apellidosNuevo);
+            pstmt.setString(3, dni);
+            pstmt.execute();
         } catch (Exception e) {
             
         } finally {
-            
+            closeConnectSQLite();
         }
         
     }

@@ -3,25 +3,13 @@
     Created on : 11-ene-2021, 17:57:07
     Author     : Alanis
 --%>
-
+<%@ page import="es.iespuertodelacruz.jpexposito.controlador.UsuarioControlador" %>
+<%@ page import="es.iespuertodelacruz.jpexposito.exception.DatosIncorrectosException" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@ page import="es.iespuertodelacruz.jpexposito.modelo.jdbc.dao.UsuarioDao" %>
-<%@ page import="es.iespuertodelacruz.jpexposito.modelo.Usuario" %>
 
 
-<%
 
-    String dni = request.getParameter("dni");
-    String nombre = request.getParameter("nombre");
-    String apellidos = request.getParameter("apellidos");
-    
-    Usuario usuario = new Usuario(dni, nombre, apellidos);
-
-    insertar(usuario);
-    
-
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,6 +17,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%
+
+            String dni = request.getParameter("dni");
+            String nombre = request.getParameter("nombre");
+            String apellidos = request.getParameter("apellidos");
+            try {
+                UsuarioControlador.insertar(dni, nombre, apellidos);
+                System.out.println("salio bn");
+            } catch (Exception ex) {
+                System.out.println("erroooooooooooooor");
+            }
+
+        %>
+        <h1>El usuario ha sido agregado.</h1>
     </body>
 </html>
