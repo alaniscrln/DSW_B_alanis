@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jpexposito
  */
 
-@XmlRootElement
+//@XmlRootElement
 public class Usuario {
     
     private String dni;

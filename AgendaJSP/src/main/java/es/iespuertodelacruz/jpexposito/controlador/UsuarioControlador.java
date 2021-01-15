@@ -2,9 +2,14 @@ package es.iespuertodelacruz.jpexposito.controlador;
 
 import es.iespuertodelacruz.jpexposito.modelo.Usuario;
 import es.iespuertodelacruz.jpexposito.exception.DatosIncorrectosException;
+import es.iespuertodelacruz.jpexposito.exception.FicheroNoExisteException;
 import es.iespuertodelacruz.jpexposito.exception.UsuarioExisteException;
+import es.iespuertodelacruz.jpexposito.exception.UsuarioNoInsertadoException;
+import es.iespuertodelacruz.jpexposito.modelo.file.UsuarioFile;
 import es.iespuertodelacruz.jpexposito.modelo.jdbc.dao.UsuarioDao;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,10 +17,11 @@ import java.util.ArrayList;
  */
 public class UsuarioControlador {
 
-    UsuarioDao usuarioDao;
-
-    public void UsuarioControlador() {
-
+    //UsuarioDao usuarioDao;
+    UsuarioFile uf;
+    public void UsuarioControlador() throws FicheroNoExisteException {
+        //usuarioDao = new UsuarioDao();
+        uf = new UsuarioFile("agenda.txt");
     }
 
     public void insertar(String dni, String nombre, String apellidos) throws DatosIncorrectosException, UsuarioExisteException {
@@ -39,7 +45,11 @@ public class UsuarioControlador {
 
         Usuario usuario = new Usuario(dni, nombre, apellidos);
 
-        usuarioDao.insertar(usuario);
+        try {
+            uf.insertar(usuario);
+        } catch (UsuarioNoInsertadoException ex) {
+            System.out.println("error: " + ex.getMessage());
+        }
 
     }
 
@@ -62,7 +72,7 @@ public class UsuarioControlador {
             throw new DatosIncorrectosException(camposIncorrectos);
         }
 
-        usuarioDao.modificar(dni, nombreNuevo, apellidosNuevo);
+        uf.modificar(dni, dni, nombreNuevo, nombreNuevo);
 
     }
 
@@ -77,11 +87,11 @@ public class UsuarioControlador {
             throw new DatosIncorrectosException(camposIncorrectos);
         }
 
-        usuarioDao.eliminar(dni);
+        uf.eliminar(dni);
 
     }
 
-    public Usuario buscar(String dni) throws DatosIncorrectosException {
+    public String buscar(String dni) throws DatosIncorrectosException {
         String camposIncorrectos = null;
 
         if (dni == null || dni.isEmpty()) {
@@ -92,10 +102,10 @@ public class UsuarioControlador {
             throw new DatosIncorrectosException(camposIncorrectos);
         }
 
-        return usuarioDao.buscar(dni);
+        return uf.buscar(dni);
     }
 
-    public ArrayList<Usuario> buscarTodos() {
-        return usuarioDao.buscarTodos();
+    public void buscarTodos() {
+        uf.buscarTodos();
     }
 }

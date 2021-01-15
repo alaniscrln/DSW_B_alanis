@@ -8,13 +8,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author jpexposito
  */
 public class UsuarioDao extends Conexion {
+
+    
+    public UsuarioDao() {
+    }
+    
     
     String tabla = "Usuario";
     
@@ -34,8 +38,11 @@ public class UsuarioDao extends Conexion {
     public void insertar(Usuario usuario) throws UsuarioExisteException {
 
         try{
+            Conexion conex = new Conexion();
+            Connection conn = conex.openConnectSQLite();
+            
             PreparedStatement pstmt = null;
-            pstmt = openConnectSQLite().prepareStatement(sqlInsertar);
+            pstmt = conn.prepareStatement(sqlInsertar);
             pstmt.setString(1,usuario.getDni());
             pstmt.setString(2,usuario.getNombre());
             pstmt.setString(3,usuario.getApellido());
