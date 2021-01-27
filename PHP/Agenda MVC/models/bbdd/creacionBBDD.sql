@@ -54,3 +54,53 @@ SEGUIR LA ESTRUCTURA DEL ARCHIVO ejemplo-php-poo-mvcArchivo DE LA PLATAFORMA.
 
 
 */
+
+
+
+
+
+
+
+
+
+
+/*
+
+CAMBIAR LAS TABLAS!!!!!!!!!!!!!!!!!!! OTRA VEZ ;^;
+
+crear una q englobe a empresas y personas: contactos
+sus attrib: id, tipo, nombre, tlfn, cumpleanos, web
+
+asi solo hay una tabla de actividades.
+
+*/
+
+create table contactos(
+    id NOT NULL PRIMARY KEY,
+    tipo VARCHAR(8) NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
+    telefono VARCHAR(11) NOT NULL
+);
+
+create table actividades(
+    id NOT NULL,
+    hora VARCHAR(5),
+    lugar VARCHAR(50) NOT NULL,
+    actividad VARCHAR(200) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) REFERENCES contactos(id)
+);
+
+create table webs(
+    id NOT NULL,
+    web VARCHAR(50) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY (id) REFERENCES contactos(id)
+);
+
+create table cumpleanos(
+    id NOT NULL,
+    cumpleanos VARCHAR(50) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY (id) REFERENCES contactos(id)
+);

@@ -18,4 +18,7 @@
         
     }
 
+    /*
+    verificar la actividad 
+    */ 
 ?>
