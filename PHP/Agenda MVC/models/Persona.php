@@ -1,6 +1,7 @@
 <?php
 
     class Persona extends Contacto{
+        use Actividad;
         
         private $cumpleanos;
 

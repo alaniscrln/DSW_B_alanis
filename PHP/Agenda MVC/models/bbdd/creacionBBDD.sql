@@ -16,6 +16,25 @@ create table empresas(
     web VARCHAR(50)
 );
 
+/*no estoy segura de esto de abajo*/
+
+create table actividades_personas(
+    dni VARCHAR(9) NOT NULL,
+    hora VARCHAR(5),
+    lugar VARCHAR(50) NOT NULL,
+    actividad VARCHAR(200) NOT NULL,
+    PRIMARY KEY (dni),
+    FOREIGN KEY (dni) REFERENCES personas(dni)
+);
+
+create table actividades_empresas(
+    cial VARCHAR(10) NOT NULL,
+    hora VARCHAR(5),
+    lugar VARCHAR(50) NOT NULL,
+    actividad VARCHAR(200) NOT NULL,
+    PRIMARY KEY (cial),
+    FOREIGN KEY (cial) REFERENCES empresas(cial)
+);
 
 /*
 

@@ -1,8 +1,7 @@
 <?php
 
-    //require "Contacto.php";
-
     class Empresa extends Contacto{
+        use Actividad;
 
         private $web;
 
