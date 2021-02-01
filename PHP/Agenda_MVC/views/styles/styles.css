@@ -1,0 +1,20 @@
+.navbar-light{
+    background-color: rgb(202, 138, 255) !important;
+}
+
+.btn-primary {
+    color: #212529;
+    background-color: rgb(202, 138, 255) !important;
+    border-color: blueviolet !important;
+}
+
+.btn-primary:hover {
+    color: #212529;
+    background-color:rgb(213, 166, 251) !important;
+    border-color: blueviolet !important
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+    box-shadow: 0 0 0 .2rem rgba(198, 129, 255, 0.5) !important; 
+}
