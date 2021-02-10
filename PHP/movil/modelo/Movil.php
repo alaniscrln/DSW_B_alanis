@@ -1,6 +1,6 @@
 <?php
 
-    class Movil extends EntidadBase{
+    class Movil extends ModeloMovil{
 
         private $marca;
         private $modelo;
@@ -42,9 +42,5 @@
         }
  
     }
-
-
-
-
 
 ?>
