@@ -1,6 +1,6 @@
 <?php
 
-    class ModeloPersona extends ModeloBase{
+    class Persona extends ModeloPersona{
 
         private $id;
         private $nombre;

@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <style>
         .footer {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
             height: 60px;
@@ -25,10 +25,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="./views/personaIndex.php">Persona</a>
+                <a class="nav-link" href="./views/familiaIndex.php">Familia</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./views/empresaIndex.php">Móvil</a>
+                <a class="nav-link" href="./views/movilIndex.php">Móvil</a>
             </li>
         </ul>
     </div>

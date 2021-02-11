@@ -7,6 +7,10 @@ drop database if exists movil;
 create database movil;
 use movil;
 
+CREATE TABLE `familias` (
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 CREATE TABLE `moviles` (
   `id` int(11) NOT NULL,
@@ -27,6 +31,10 @@ CREATE TABLE `personas` (
   `id_familia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+ALTER TABLE `familias`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
 
 ALTER TABLE `moviles`
   ADD PRIMARY KEY (`id`),
@@ -35,7 +43,12 @@ ALTER TABLE `moviles`
 
 ALTER TABLE `personas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
+  ADD KEY `id` (`id`),
+  ADD KEY `id_familia` (`id_familia`);
+
+
+ALTER TABLE `familias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 
 ALTER TABLE `moviles`
@@ -44,4 +57,9 @@ ALTER TABLE `moviles`
 
 ALTER TABLE `moviles`
   ADD CONSTRAINT `moviles_ibfk_1` FOREIGN KEY (`propietario`) REFERENCES `personas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE `personas`
+  ADD CONSTRAINT `personas_ibfk_1` FOREIGN KEY (`id_familia`) REFERENCES `familias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
+

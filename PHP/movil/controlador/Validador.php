@@ -1,6 +1,14 @@
 <?php
     trait Validador{
 
+        public function personaValida($persona){
+            if( $this->validarDni( $persona->__get("id") ) && $this->validarFecha( $persona->__get("fecha_nacimiento") ) ){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         public function soloNumeros($texto){
             return is_numeric($texto);
         }
@@ -26,4 +34,5 @@
         }
 
     }
+
 ?>

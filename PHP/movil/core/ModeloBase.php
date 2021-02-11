@@ -22,7 +22,7 @@
 
         public function ejecutarSQL($sql){
             $resultado = $this->getConn()->query($sql); 
-            $this->getConectar()->cerrarConn();
+            //$this->getConectar()->cerrarConn($this->getConn());
             return $resultado;
         }
 
@@ -37,7 +37,6 @@
                 $resultSet = 0;
             }
             
-            $this->getConectar()->cerrarConn();
             return $resultSet;
         }
 

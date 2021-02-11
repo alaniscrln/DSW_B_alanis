@@ -7,9 +7,9 @@ require_once "./vista/header.php";
     
     <div class="row">
         <div class="col-4 offset-4">
-            <button class="btn btn-primary btn-lg btn-block" onclick="location.href='./vista/personaIndex.php'">Personas</button>
+            <button class="btn btn-primary btn-lg btn-block" onclick="location.href='./vista/familiaIndex.php'">Familia</button>
             <hr>
-            <button class="btn btn-primary btn-lg btn-block" onclick="location.href='./vista/movilIndex.php'">Móviles</button>
+            <button class="btn btn-primary btn-lg btn-block" onclick="location.href='./vista/movilIndex.php'">Móvil</button>
         </div>
     </div>
         
