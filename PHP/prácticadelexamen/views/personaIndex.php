@@ -10,7 +10,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="./index.php">EJEMPLO</a>
+    <a class="navbar-brand" href="./../index.php">PERSONA</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,13 +28,14 @@
 
 <div class="container text-center">
     <div class="row mt-4">
+
         <div class="col-4 offset-4">
-            <h1 class="display-4">EJEMPLO</h1>
+            <h1 class="display-4">PERSONA</h1>
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary" onclick="location.href='./ejemplo/insertar.php'">CREAR</button>
-                <button type="button" class="btn btn-secondary" onclick="location.href='./ejemplo/eliminar.php'">ELIMINAR</button>
-                <button type="button" class="btn btn-secondary" onclick="location.href='./ejemplo/modificar.php'">MODIFICAR</button>
-                <button type="button" class="btn btn-secondary" onclick="location.href='./ejemplo/buscar.php'">BUSCAR</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='./persona/insertar.php'">CREAR</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='./persona/eliminar.php'">ELIMINAR</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='./persona/modificar.php'">MODIFICAR</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='./persona/buscar.php'">BUSCAR</button>
             </div>
         </div>
     </div>
@@ -54,7 +55,6 @@
         </div>
         
     </div>
-    
 </div>
 
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->

@@ -1,10 +1,13 @@
 <?php
     require_once "Validador.php";
-    require_once "EjemploController.php";
+    require_once "PersonaController.php";
+    require_once "MascotaController.php";
     require_once './../config/database.php';
-    require_once "./../core/EntidadBase.php";
-    require_once "./../models/ModeloEjemplo.php";
-    require_once "ClaseEjemplo.php";
+    require_once "./../core/ModeloBase.php";
+    require_once "./../models/ModeloPersona.php";
+    require_once "./../models/ModeloMascota.php";
+    require_once "Persona.php";
+    require_once "Mascota.php";
 
 ?>
 
@@ -13,13 +16,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda</title>
+    <title>MASCOTA</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="./../views/styles/styles.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="./../index.php">AGENDA</a>
+        <a class="navbar-brand" href="./../index.php">MASCOTA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,10 +32,7 @@
                     <a class="nav-link" href="./../views/personaIndex.php">Persona</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./../views/empresaIndex.php">Empresa</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./../views/actividadIndex.php">Actividad</a>
+                    <a class="nav-link" href="./../views/mascotaIndex.php">Mascota</a>
                 </li>
             </ul>
         </div>
@@ -43,26 +43,26 @@
         
         <?php
 
-            $ejemploControl = new EjemploController();
+            $personaControl = new PersonaController();
 
             $tipo = $_REQUEST["tipo"];
             switch($tipo){
-                case "insertar____":
+                case "insertarPersona":
                     session_start();
-                    $_SESSION["resultado"] = $ejemploControl->insertar();
-                    $_SESSION["listaPersona"] = $ejemploControl->getAll();
+                    $_SESSION["resultado"] = $personaControl->insertar();
+                    $_SESSION["listaPersona"] = $personaControl->getAll();
                     ?><script>window.location.replace("./../views/personaIndex.php");</script><?php
                     break;
-                case "eliminar______":
-                    echo "<h1>" . $ejemploControl->delete() . "</h1>"; 
+                case "eliminarPersona":
+                    echo "<h1>" . $personaControl->eliminar() . "</h1>"; 
                     break;
-                case "modificar______":
-                    echo "<h1>" . $ejemploControl->update() . "</h1>"; 
+                case "modificarPersona":
+                    echo "<h1>" . $personaControl->actualizar() . "</h1>"; 
                     break;
-                case "buscar_______": 
-                    echo "<h1>" . $ejemploControl->getById() . "</h1>";
+                case "buscarPersona": 
+                    echo "<h1>" . $personaControl->buscar() . "</h1>";
                     break;
-
+            
             }
 
         ?>       

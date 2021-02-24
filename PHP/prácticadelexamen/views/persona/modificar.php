@@ -28,33 +28,29 @@
 
 <div class="container text-center">
     <div class="row mt-4">
-        <div class="col-4 offset-4">
-            <h1 class="display-4">EJEMPLO</h1>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary" onclick="location.href='./ejemplo/insertar.php'">CREAR</button>
-                <button type="button" class="btn btn-secondary" onclick="location.href='./ejemplo/eliminar.php'">ELIMINAR</button>
-                <button type="button" class="btn btn-secondary" onclick="location.href='./ejemplo/modificar.php'">MODIFICAR</button>
-                <button type="button" class="btn btn-secondary" onclick="location.href='./ejemplo/buscar.php'">BUSCAR</button>
-            </div>
+    <div class="col-4 offset-4 bg-light" >
+            <br>
+            <h2>MODIFICAR</h2>
+            <hr>
+            <form action="###########/PrincipalController.php" method="POST">
+                <input type="hidden" name="tipo" value="modificar________">
+                <div class="form-group text-left">
+                    <label for="id">ID:</label>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="">
+                </div>
+                <div class="form-group text-left">
+                    <select class="custom-select form-control" name="select">
+                        <option value="columna1" selected>Cambiar columna1</option>
+                        <option value="columna2">Cambiar columna2</option>
+                    </select>
+                    <input type="text" class="form-control" id="valorNuevo" name="valorNuevo" placeholder="Valor nuevo">
+                </div>
+                <hr>
+                <button type="submit" class="btn btn-primary btn-block">MODIFICAR</button>
+                <br>
+            </form>
         </div>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-12">
-        <?php
-            session_start();
-            if( isset($_SESSION["resultado"]) && $_SESSION["resultado"] != null ){
-                echo "<br><h4>" . $_SESSION["resultado"] . "</h4>"; 
-            }
-            if( isset($_SESSION["listaPersona"]) && $_SESSION["listaPersona"] != null){
-                echo "<br><br>" . $_SESSION["listaPersona"];
-            }
-            session_destroy();
-        ?>
-        </div>
-        
-    </div>
-    
 </div>
 
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->

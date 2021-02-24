@@ -10,8 +10,8 @@ class ModeloEjemplo extends ModeloBase{
     }
 
     public function insertar($a, $b, $c){
-        $sql = "INSERT INTO $tabla VALUES('$a', '$b', '$c')";
-        $resultado = parent::ejecutarSQL($sql);
+        $sql = "INSERT INTO $this->tabla VALUES('$a', '$b', '$c')";
+        return parent::ejecutarSQL($sql);
     }
 }
 

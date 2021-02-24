@@ -1,21 +1,24 @@
 <?php
 
-    class EjemploController{
+    class MascotaController{
         use Validador;
 
         public function __construct(){
 
         }
 
-        public function insert(){
-            if(!empty( $_POST["id"]) && !empty( $_POST["nombre"]) && !empty( $_POST["cumpleanos"] ) ){
-                $persona = new Persona($_POST["id"], $_POST["nombre"], $_POST["cumpleanos"]);
-                if($this->validar($persona) ){
+        public function insertar(){
+            if( !empty( $_POST["raza"]) && !empty( $_POST["fecha_nacimiento"] ) && !empty( $_POST["id_propietario"] ) ){
+                $mascota = new Mascota($_POST["raza"], $_POST["fecha_nacimiento"], $_POST["id_propietario"]);
+                $persona = new Persona();
+                if($this->mascotaValida($mascota) 
+                && $persona->buscar($mascota->__get("id_propietario"))!= 0 ){
+
                     $respuesta;
-                    if($persona->insert("","","","","") ){
-                        $respuesta = "Se ha introducido correctamente a " . $persona->nombre . " en la agenda";
+                    if($mascota->insertar() ){
+                        $respuesta = "Se ha introducido correctamente a " . $mascota->__get("nombre");
                     }else{
-                        $respuesta = "No se ha podido introducir a " . $persona->nombre . " en la agenda";
+                        $respuesta = "No se ha podido introducir a " . $mascota->__get("nombre");
                     }
                 }else{
                     $respuesta = "Por favor, introduzca los datos correctamente";
@@ -27,17 +30,17 @@
             return $respuesta;
         }
 
-        public function delete(){
+        public function eliminar(){
             if(!empty( $_GET["id"])){
-                if($this->validarDni($_GET["id"])){
-                    $persona = new Persona();
+                if($this->soloNumeros($_GET["id"])){
+                    $mascota = new Mascota();
                     $id = $_GET["id"];
 
                     $respuesta;
-                    if( $persona->delete($id) ){
-                        $respuesta = "Se ha eliminado correctamente a la persona de la agenda";
+                    if( $mascota->eliminar($id) ){
+                        $respuesta = "Se ha eliminado correctamente a la mascota";
                     }else{
-                        $respuesta = "No se ha podido eliminar a la persona de la agenda";
+                        $respuesta = "No se ha podido eliminar a la mascota";
                     }
                 }else{
                     $respuesta = "Por favor, introduzca los datos correctamente";
@@ -49,29 +52,27 @@
             return $respuesta;
         }
 
-        public function update(){
+        public function actualizar(){
             if(!empty( $_POST["id"]) && !empty($_POST["valorNuevo"]) ){
-                $persona = new Persona();
+                $mascota = new Mascota();
                 $id = $_POST["id"];
                 $select = $_POST["select"];
                 $valorNuevo = $_POST["valorNuevo"];
-                if($this->validarDni($id) && $persona->getByID($id) != 0 ){
+                if($this->soloNumeros($id)){
                     $resultado;
                     $respuesta = "";
                     switch($select){
-                        case "nombre":
-                            $resultado = $persona->update($id, "contactos", $select, $valorNuevo);
-                            break;
-                        case "telefono":
-                            if($this->soloNumeros($valorNuevo)){
-                                $resultado = $persona->update($id, "contactos", $select, $valorNuevo);
+                        case "id_propietario":
+                            $persona = new Persona();
+                            if($persona->buscar($valorNuevo) != 0 ){
+                                $resultado = $mascota->actualizar($id, $select, $valorNuevo);
                             }else{
                                 $respuesta = "Por favor, introduzca los datos correctamente";
                             }
                             break;
-                        case "cumpleanos":
+                        case "fecha_nacimiento":
                             if($this->validarFecha($valorNuevo)){
-                                $resultado = $persona->update($id, "personas", $select, $valorNuevo);
+                                $resultado = $mascota->actualizar($id, $select, $valorNuevo);
                             }else{
                                 $respuesta = "Por favor, introduzca los datos correctamente";
                             }
@@ -80,13 +81,13 @@
                     
                     if($respuesta == ""){
                         if($resultado){
-                            $respuesta = "Se ha modificado correctamente el valor de " . $select . " a " . $valorNuevo . " en la agenda";
+                            $respuesta = "Se ha modificado correctamente el valor de " . $select . " a " . $valorNuevo;
                         }else{
-                            $respuesta = "No se ha podido modificar el valor de " . $select . " en la agenda";
+                            $respuesta = "No se ha podido modificar el valor de " . $select;
                         }
                     }
                 }else{
-                    $respuesta = "No se ha podido modificar el valor de " . $select . " en la agenda";
+                    $respuesta = "No se ha podido modificar el valor de " . $select;
                 }
 
             }else{
@@ -97,21 +98,21 @@
 
         }
 
-        public function getById(){
+        public function buscar(){
             $respuesta="";
             if(!empty( $_GET["id"])){
-                if($this->validarDni($_GET["id"])){
-                    $persona = new Persona();
+                if($this->soloNumeros($_GET["id"])){
+                    $mascota = new Mascota();
                     $id = $_GET["id"];
 
-                    $datos = $persona->getByID($id);
+                    $datos = $mascota->buscar($id);
                     $respuesta = '<h1 class="display-4">Datos</h1><br><table class="table">
                         <thead>
                             <tr>
-                            <th scope="col">DNI</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Teléfono</th>
-                            <th scope="col">Cumpleaños</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Raza</th>
+                            <th scope="col">Fecha nacimiento</th>
+                            <th scope="col">DNI propietario</th>
                             </tr>
                         </thead>
                         <tbody>';
@@ -120,9 +121,9 @@
                         $respuesta = $respuesta . '
                             <tr>
                                 <td>' . $datos["id"] . '</td>
-                                <td>' . $datos["nombre"] . '</td>
-                                <td>' . $datos["telefono"] . '</td>
-                                <td>' . $datos["cumpleanos"] . '</td>
+                                <td>' . $datos["raza"] . '</td>
+                                <td>' . $datos["fecha_nacimiento"] . '</td>
+                                <td>' . $datos["id_propietario"] . '</td>
                             </tr>
                         </tbody>
                         </table>';
@@ -138,27 +139,27 @@
 
         public function getAll(){
             $respuesta="";
-            $persona = new Persona();
-            $sql= "SELECT c.id, c.nombre, c.telefono, p.cumpleanos FROM contactos c INNER JOIN personas p on c.id = p.id WHERE c.tipo = 'Persona'";
-            $datos = $persona->getAll($sql);
+            $mascota = new Mascota();
+            $sql= "SELECT * FROM $mascota->tabla";
+            $datos = $mascota->getAll($sql);
 
             $respuesta = '<table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">DNI</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Teléfono</th>
-                            <th scope="col">Cumpleaños</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Raza</th>
+                            <th scope="col">Fecha nacimiento</th>
+                            <th scope="col">DNI propietario</th>
                         </tr>
                     </thead>
                     <tbody>';
             if($datos != 0){
                 foreach($datos as $p){
                     $respuesta = $respuesta . '<tr>
-                        <td>' . $p["id"] . '</td>
-                        <td>' . $p["nombre"] . '</td>
-                        <td>' . $p["telefono"] . '</td>
-                        <td>' . $p["cumpleanos"] . '</td>
+                        <td>' . $datos["id"] . '</td>
+                        <td>' . $datos["raza"] . '</td>
+                        <td>' . $datos["fecha_nacimiento"] . '</td>
+                        <td>' . $datos["id_propietario"] . '</td>
                     </tr>';
                 }
             }
