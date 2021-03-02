@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}{% endblock %}
+
+{% block body %}
+{{parent()}}
+    <div class ="container-fluid">
+    <h1 class="text-center my-3">Mascotas de {{user}}</h1>
+        <div class="row text-center">
+            <div class="col-4 offset-4">
+                {% for mascota in mascotas %}
+                    <div class="bg-info p-4 m-4" onclick="window.location.href= '{{path('ver-mascota', {id: mascota.id})}}'">
+                        <div class="">
+                            <h3>{{mascota.nombre}}</h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
