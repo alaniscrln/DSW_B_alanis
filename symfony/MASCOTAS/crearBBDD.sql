@@ -1,3 +1,7 @@
+drop database if exists mascotas;
+create database mascotas;
+use mascotas;
+
 -- phpMyAdmin SQL Dump
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
@@ -26,12 +30,6 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `mascota`
 --
-
-
-drop database if exists mascotas;
-create database mascotas;
-use mascotas;
-
 
 CREATE TABLE `mascota` (
   `id` int(11) NOT NULL,
